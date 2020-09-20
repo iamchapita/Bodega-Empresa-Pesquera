@@ -1,6 +1,0 @@
-package unah.edu.poo;
-
-public class Woody implements Juguete{
-
-	
-}
