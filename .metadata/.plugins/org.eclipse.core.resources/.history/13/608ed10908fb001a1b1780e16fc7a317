@@ -1,0 +1,11 @@
+package unah.edu.poo;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		Juguete J1 = new BuzzLightYear(2014);
+
+	}
+
+}

@@ -1,0 +1,18 @@
+package unah.edu.poo;
+
+public class BuzzLightYear extends JugueteVolador {
+
+	final String nombre = "BuzzLightYear";
+	
+	@Override
+	public void hablar() {
+		
+	}
+
+	@Override
+	public void volar() {
+		
+	}
+	
+
+}
