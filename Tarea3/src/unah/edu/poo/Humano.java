@@ -12,7 +12,7 @@ public abstract class Humano implements ComportamientoHumano, AccionesComunes{
 	public Humano(String nombre, LocalDate fechaNacimiento) {
 		super();
 		this.nombre = nombre;
-		this.fechaNacimiento = fechaNacimiento;
+		this.setFechaNacimiento(fechaNacimiento);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public abstract class Humano implements ComportamientoHumano, AccionesComunes{
 	
 	@Override
 	public String compararEdad(Humano h) {
-		if(this.fechaNacimiento.isBefore(h.fechaNacimiento)) {
+		if(this.getFechaNacimiento().isBefore(h.getFechaNacimiento())) {
 			return this.nombre;
 		}
 		return h.nombre;
@@ -89,6 +89,14 @@ public abstract class Humano implements ComportamientoHumano, AccionesComunes{
 				}
 			}
 		}
+	}
+
+	public LocalDate getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 	
 	

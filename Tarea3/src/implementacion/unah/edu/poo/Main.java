@@ -14,6 +14,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		
 		System.out.println("-----------------------------------------------------------");
 		//Agregando la fecha de hoy al objeto fecha1
 		LocalDate fecha1 = LocalDate.now();
@@ -26,7 +27,7 @@ public class Main {
 		humano1.adicionarCancion(new Cancion("Señor Locutor", 3));
 		humano1.adicionarCancion(new Cancion("La Puerta Negra", 4));
 		humano1.adicionarCancion(new Cancion("El Chofer", 5));
-		
+		/*
 		//Listando canciones contenidas en ArrayList
 		System.out.println("OBJETO HUMANO 1");
 		System.out.println("-----------------------------------------------------------");
@@ -122,7 +123,8 @@ public class Main {
 		animal2.dormir();
 		animal2.hablar();
 		System.out.println("-----------------------------------------------------------");		
-		
+		*/
+		System.out.println(humano1.getFechaNacimiento());
 	}
 
 }
