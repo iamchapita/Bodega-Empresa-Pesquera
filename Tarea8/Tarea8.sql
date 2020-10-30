@@ -1,19 +1,52 @@
 create	database GestionVentas;
 use GestionVentas;
 
-create table Cliente(idCliente int primary key, saldo double, limCredito double, direccionCliente varchar(50));
+CREATE TABLE Cliente (
+    idCliente INT PRIMARY KEY,
+    saldo DOUBLE,
+    limCredito DOUBLE,
+    direccionCliente VARCHAR(50)
+);
 
-create table Pedido(idPedido int primary key, fechaPedido varchar(10), idCliente int ,foreign key(idCliente) references Cliente(idCliente));
+CREATE TABLE Pedido (
+    idPedido INT PRIMARY KEY,
+    fechaPedido VARCHAR(10),
+    idCliente INT,
+    FOREIGN KEY (idCliente)
+        REFERENCES Cliente (idCliente)
+);
 
-create table Articulo(idArticulo int primary key, precio int, descripcion varchar(50));
+CREATE TABLE Articulo (
+    idArticulo INT PRIMARY KEY,
+    precio INT,
+    descripcion VARCHAR(50)
+);
 
-create table PedidoArticulo(idPedido int, idArticulo int, cantidad int, precio int, primary key(idArticulo, idPedido), 
-	foreign key (idPedido) references Pedido(idPedido),
-	foreign key (idArticulo) references Articulo(idArticulo));
+CREATE TABLE PedidoArticulo (
+    idPedido INT,
+    idArticulo INT,
+    cantidad INT,
+    precio INT,
+    PRIMARY KEY (idArticulo , idPedido),
+    FOREIGN KEY (idPedido)
+        REFERENCES Pedido (idPedido),
+    FOREIGN KEY (idArticulo)
+        REFERENCES Articulo (idArticulo)
+);
 
-create table Fabrica(idFabrica int primary key, telefono varchar(15));
+CREATE TABLE Fabrica (
+    idFabrica INT PRIMARY KEY,
+    telefono VARCHAR(15)
+);
 
-create table Produce(idArticulo int, idFabrica int, cantidad int, primary key(idArticulo, idFabrica),
-	foreign key (idArticulo) references Articulo(idArticulo),
-    foreign key (idFabrica) references Fabrica(idFabrica));
+CREATE TABLE Produce (
+    idArticulo INT,
+    idFabrica INT,
+    cantidad INT,
+    PRIMARY KEY (idArticulo , idFabrica),
+    FOREIGN KEY (idArticulo)
+        REFERENCES Articulo (idArticulo),
+    FOREIGN KEY (idFabrica)
+        REFERENCES Fabrica (idFabrica)
+);
 
