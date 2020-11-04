@@ -21,7 +21,8 @@ CREATE TABLE Mecanico (
     idMecanico INT PRIMARY KEY,
     nombre VARCHAR(25),
     usuario VARCHAR(25),
-    contrasenia VARCHAR(25)
+    contrasenia VARCHAR(25),
+    rol VARCHAR(20)
 );
 
 CREATE TABLE Repara (
@@ -36,3 +37,9 @@ CREATE TABLE Repara (
     FOREIGN KEY (idMecanico)
         REFERENCES Mecanico (idMecanico)
 );
+
+
+
+
+
+

@@ -22,7 +22,7 @@ public class ServicioAuto {
 		return this.repositorioAuto.findAll();
 	}
 
-	public Auto obtenerAuto(int idAuto) {
+	public Auto buscartAuto(int idAuto) {
 		return this.repositorioAuto.findById(idAuto);
 	}
 }

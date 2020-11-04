@@ -45,13 +45,15 @@ public class Repara implements Serializable {
 	public Repara() {
 	}
 
-	public Repara(int idAuto, int idMecanico, LocalDate fecha, double precio, String descripcion) {
+	public Repara(int idAuto, int idMecanico, LocalDate fecha, double precio, String descripcion, Auto auto, Mecanico mecanico) {
 		super();
 		this.idAuto = idAuto;
 		this.idMecanico = idMecanico;
 		this.fecha = fecha;
 		this.precio = precio;
 		this.descripcion = descripcion;
+		this.auto = auto;
+		this.mecanico = mecanico;
 	}
 
 	public int getIdAuto() {

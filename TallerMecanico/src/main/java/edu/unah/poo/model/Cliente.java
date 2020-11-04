@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Cliente")
-
 public class Cliente {
 
 	@Id
@@ -19,7 +18,7 @@ public class Cliente {
 	private String direccion;
 	private String telefono;
 
-	@OneToMany(mappedBy = "Cliente", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
 	private List<Auto> autos;
 
 	public Cliente() {

@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "Auto")
-
 public class Auto {
 
 	@Id
@@ -23,14 +22,15 @@ public class Auto {
 	@JsonBackReference
 	private Cliente cliente;
 
-	public Auto(int idAuto, String tipo, int anio) {
+	public Auto() {
+	}
+	
+	public Auto(int idAuto, String tipo, int anio, Cliente cliente) {
 		super();
 		this.idAuto = idAuto;
 		this.tipo = tipo;
 		this.anio = anio;
-	}
-
-	public Auto() {
+		this.cliente = cliente;
 	}
 
 	public int getIdAuto() {
