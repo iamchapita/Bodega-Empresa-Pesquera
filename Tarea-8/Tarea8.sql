@@ -5,7 +5,7 @@ CREATE TABLE Cliente (
     idCliente INT PRIMARY KEY,
     saldo DOUBLE,
     limCredito DOUBLE,
-    direccionCliente VARCHAR(50)
+    direccion VARCHAR(50)
 );
 
 CREATE TABLE Pedido (
@@ -18,7 +18,7 @@ CREATE TABLE Pedido (
 
 CREATE TABLE Articulo (
     idArticulo INT PRIMARY KEY,
-    precio INT,
+    precio DOUBLE,
     descripcion VARCHAR(50)
 );
 
@@ -27,6 +27,7 @@ CREATE TABLE PedidoArticulo (
     idArticulo INT,
     cantidad INT,
     precio INT,
+    fecha VARCHAR(10),
     PRIMARY KEY (idArticulo , idPedido),
     FOREIGN KEY (idPedido)
         REFERENCES Pedido (idPedido),
@@ -50,3 +51,18 @@ CREATE TABLE Produce (
         REFERENCES Fabrica (idFabrica)
 );
 
+use GestionVentas;
+insert into Cliente values (1,1000.0,25000.0,"Palo Pintado");
+insert into Cliente values (2,1000.0,25000.0,"Tronco Pintado");
+insert into Pedido values(1,"2020-10-11",1);
+insert into Pedido values(2,"2020-11-12",2);
+insert into Articulo values(1,200.0, "Es un confite");
+insert into Articulo values(2,300.0, "No es un confite");
+SELECT 
+    *
+FROM
+    PedidoArticulo;
+DELETE FROM Cliente;
+DELETE FROM Pedido;
+DELETE FROM Articulo;
+DELETE FROM PedidoArticulo;
