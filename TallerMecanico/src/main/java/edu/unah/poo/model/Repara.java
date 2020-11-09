@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "Repara")
 @IdClass(IdRepara.class)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Repara implements Serializable {
 
 	/**
@@ -45,7 +45,8 @@ public class Repara implements Serializable {
 	public Repara() {
 	}
 
-	public Repara(int idAuto, int idMecanico, LocalDate fecha, double precio, String descripcion, Auto auto, Mecanico mecanico) {
+	public Repara(int idAuto, int idMecanico, LocalDate fecha, double precio, String descripcion, Auto auto,
+			Mecanico mecanico) {
 		super();
 		this.idAuto = idAuto;
 		this.idMecanico = idMecanico;
