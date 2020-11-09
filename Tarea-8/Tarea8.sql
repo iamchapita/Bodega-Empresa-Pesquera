@@ -52,12 +52,6 @@ CREATE TABLE Produce (
 );
 
 use GestionVentas;
-insert into Cliente values (1,1000.0,25000.0,"Palo Pintado");
-insert into Cliente values (2,1000.0,25000.0,"Tronco Pintado");
-insert into Pedido values(1,"2020-10-11",1);
-insert into Pedido values(2,"2020-11-12",2);
-insert into Articulo values(1,200.0, "Es un confite");
-insert into Articulo values(2,300.0, "No es un confite");
 SELECT 
     *
 FROM
