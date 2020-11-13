@@ -85,7 +85,7 @@ public class Controlador {
 	// Mecánico
 	// ==============================================================================================================//
 	@RequestMapping(value = "/mecanico/crearMecanico", method = RequestMethod.GET)
-	public Mecanico crearMecanico(@RequestParam(name = "id") int idMecanico,
+	public Mecanico crearMecanico(@RequestParam(name = "idMecanico") int idMecanico,
 			@RequestParam(name = "nombre") String nombre, @RequestParam(name = "usuario") String usuario,
 			@RequestParam(name = "contrasenia") String contrasenia, @RequestParam(name = "rol") String rol) {
 

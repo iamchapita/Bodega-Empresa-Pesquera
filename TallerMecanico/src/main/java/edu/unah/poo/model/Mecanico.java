@@ -16,6 +16,9 @@ public class Mecanico {
 	private String contrasenia;
 	private String Rol;
 
+	public Mecanico() {
+	}
+
 	public Mecanico(int idMecanico, String nombre, String usuario, String contrasenia, String rol) {
 		super();
 		this.idMecanico = idMecanico;
@@ -23,9 +26,6 @@ public class Mecanico {
 		this.usuario = usuario;
 		this.contrasenia = contrasenia;
 		Rol = rol;
-	}
-
-	public Mecanico() {
 	}
 
 	public int getIdMecanico() {

@@ -39,7 +39,10 @@ CREATE TABLE Repara (
 );
 
 
-
+delete from Cliente;
+delete from Auto;
+delete from Mecanico;
+delete from Repara;
 
 
 
