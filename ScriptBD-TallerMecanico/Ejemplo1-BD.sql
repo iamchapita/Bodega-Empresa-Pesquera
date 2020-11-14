@@ -25,6 +25,7 @@ CREATE TABLE Mecanico (
     rol VARCHAR(20)
 );
 
+
 CREATE TABLE Repara (
     idAuto INT,
     idMecanico INT,
