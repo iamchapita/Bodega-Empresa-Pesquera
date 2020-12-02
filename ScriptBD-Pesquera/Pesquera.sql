@@ -8,15 +8,18 @@ CREATE TABLE Proveedor (
 
 CREATE TABLE Cargamento (
     idCargamento INT PRIMARY KEY,
+    idEmpleado INT,
+    idPescado INT,
+    idProveedor INT,
     calidad INT,
     estado VARCHAR(20),
     pesoGlobal INT,
-    idEmpleado INT,
-    idPescado INT,
     FOREIGN KEY (idEmpleado)
         REFERENCES Empleado (idEmpleado),
     FOREIGN KEY (idPescado)
-        REFERENCES Pescado (idPescado)
+        REFERENCES Pescado (idPescado),
+    FOREIGN KEY (idProveedor)
+        REFERENCES Proveedor (idProveedor)
 );
 
 CREATE TABLE Empleado (
@@ -35,19 +38,6 @@ CREATE TABLE Pescado (
     nombre VARCHAR(20),
     tamanioPromedio DOUBLE,
     tipo VARCHAR(20)
-);
-
-CREATE TABLE Envia (
-    idProveedor INT,
-    idCargamento INT,
-    pesoGlobal DOUBLE,
-    precioKilo DOUBLE,
-    tipo VARCHAR(20),
-    PRIMARY KEY (idProveedor , idCargamento),
-    FOREIGN KEY (idProveedor)
-        REFERENCES Proveedor (idProveedor),
-    FOREIGN KEY (idCargamento)
-        REFERENCES Cargamento (idCargamento)
 );
 
 CREATE TABLE CargamentoLimpieza (
