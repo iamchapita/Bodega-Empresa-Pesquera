@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-12-02T06:06:09.368Z" agent="5.0 (X11)" etag="3-OlS8VroUTEbbTAFq1a" version="13.10.4" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-02T06:30:32.823Z" agent="5.0 (X11)" etag="Pr9v0ACZHrMsInhvgEqr" version="13.10.5" type="github">
   <diagram id="kUSdFy0e1hqgJt6HPNU2" name="Page-1">
-    <mxGraphModel dx="1583" dy="1772" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1108" dy="1591" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -61,7 +61,7 @@
         <mxCell id="SdPYyNpZILJqe6Lk2ZxD-19" value="PK,FK2" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;overflow=hidden;" parent="SdPYyNpZILJqe6Lk2ZxD-18" vertex="1">
           <mxGeometry width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="SdPYyNpZILJqe6Lk2ZxD-20" value="numCargamento" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=5;overflow=hidden;" parent="SdPYyNpZILJqe6Lk2ZxD-18" vertex="1">
+        <mxCell id="SdPYyNpZILJqe6Lk2ZxD-20" value="idCargamento" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=5;overflow=hidden;" parent="SdPYyNpZILJqe6Lk2ZxD-18" vertex="1">
           <mxGeometry x="60" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="SdPYyNpZILJqe6Lk2ZxD-24" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="SdPYyNpZILJqe6Lk2ZxD-14" vertex="1">
