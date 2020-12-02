@@ -17,7 +17,7 @@ public class Proveedor {
 	private int idProveedor;
 	private String nombre;
 
-	@OneToMany(mappedBy = "cargamentos", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "proveedor", fetch = FetchType.EAGER)
 	private List<Cargamento> cargamentos;
 	
 	public Proveedor() {

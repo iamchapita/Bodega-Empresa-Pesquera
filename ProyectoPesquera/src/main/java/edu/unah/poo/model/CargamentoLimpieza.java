@@ -1,12 +1,14 @@
 package edu.unah.poo.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -31,19 +33,16 @@ public class CargamentoLimpieza implements Serializable {
 	@JsonBackReference
 	private Limpieza limpieza;
 
-	@ManyToOne
-	@JoinColumn(name = "idCargamento", referencedColumnName = "idCargamento", insertable = false, updatable = false)
-	@JsonBackReference
-	private Cargamento cargamento;
+	@OneToMany(mappedBy = "cargamentoLimpieza")
+	private List<Cargamento> cargamentos;
 
 	public CargamentoLimpieza() {
 	}
 
-	public CargamentoLimpieza(int idLimpieza, int idCargamento, Limpieza limpieza, Cargamento cargamento) {
+	public CargamentoLimpieza(int idLimpieza, int idCargamento, Limpieza limpieza) {
 		this.idLimpieza = idLimpieza;
 		this.idCargamento = idCargamento;
 		this.limpieza = limpieza;
-		this.cargamento = cargamento;
 	}
 
 	public int getIdLimpieza() {
@@ -68,14 +67,6 @@ public class CargamentoLimpieza implements Serializable {
 
 	public void setLimpieza(Limpieza limpieza) {
 		this.limpieza = limpieza;
-	}
-
-	public Cargamento getCargamento() {
-		return cargamento;
-	}
-
-	public void setCargamento(Cargamento cargamento) {
-		this.cargamento = cargamento;
 	}
 
 }

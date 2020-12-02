@@ -15,9 +15,6 @@ public class Cargamento {
 
 	@Id
 	private int idCargamento;
-	private int idEmpleado;
-	private int idPez;
-	private int idProveedor;
 	private int calidad;
 	private String estado;
 	private double pesoGlobal;
@@ -38,19 +35,24 @@ public class Cargamento {
 	@JsonBackReference
 	private Empleado empleado;
 
+	@ManyToOne
+	@JoinColumn(name="idCargamento")
+	@JsonBackReference
+	private CargamentoLimpieza cargamentoLimpieza;
+	
 	public Cargamento() {
 	}
 
-	public Cargamento(int idCargamento, int idEmpleado, int idPez, int idProveedor, int calidad, String estado,
-			double pesoGlobal, double precioKilo) {
+	public Cargamento(int idCargamento, int calidad, String estado, double pesoGlobal, double precioKilo,
+			Proveedor proveedor, Pescado pescado, Empleado empleado) {
 		this.idCargamento = idCargamento;
-		this.idEmpleado = idEmpleado;
-		this.idPez = idPez;
-		this.idProveedor = idProveedor;
 		this.calidad = calidad;
 		this.estado = estado;
 		this.pesoGlobal = pesoGlobal;
 		this.precioKilo = precioKilo;
+		this.proveedor = proveedor;
+		this.pescado = pescado;
+		this.empleado = empleado;
 	}
 
 	public int getIdCargamento() {
@@ -59,30 +61,6 @@ public class Cargamento {
 
 	public void setIdCargamento(int idCargamento) {
 		this.idCargamento = idCargamento;
-	}
-
-	public int getIdEmpleado() {
-		return idEmpleado;
-	}
-
-	public void setIdEmpleado(int idEmpleado) {
-		this.idEmpleado = idEmpleado;
-	}
-
-	public int getIdPez() {
-		return idPez;
-	}
-
-	public void setIdPez(int idPez) {
-		this.idPez = idPez;
-	}
-
-	public int getIdProveedor() {
-		return idProveedor;
-	}
-
-	public void setIdProveedor(int idProveedor) {
-		this.idProveedor = idProveedor;
 	}
 
 	public int getCalidad() {
@@ -115,6 +93,30 @@ public class Cargamento {
 
 	public void setPrecioKilo(double precioKilo) {
 		this.precioKilo = precioKilo;
+	}
+
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
+	}
+
+	public Pescado getPescado() {
+		return pescado;
+	}
+
+	public void setPescado(Pescado pescado) {
+		this.pescado = pescado;
+	}
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
 	}
 
 }

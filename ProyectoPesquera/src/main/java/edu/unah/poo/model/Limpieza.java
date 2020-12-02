@@ -17,22 +17,20 @@ public class Limpieza {
 
 	@Id
 	private int idLimpieza;
-	private int idSupervisor;
 	private LocalTime horaFinal;
 	private LocalTime horaInicial;
 	private int numEmpleados;
 
 	@ManyToOne
-	@JoinColumn(name = "idSupervisor")
+	@JoinColumn(name = "idEmpleado")
 	@JsonBackReference
 	private Empleado supervisor;
 
 	public Limpieza() {
 	}
 
-	public Limpieza(int idLimpieza, int idSupervisor, LocalTime horaFinal, LocalTime horaInicial, int numEmpleados) {
+	public Limpieza(int idLimpieza, LocalTime horaFinal, LocalTime horaInicial, int numEmpleados) {
 		this.idLimpieza = idLimpieza;
-		this.idSupervisor = idSupervisor;
 		this.horaFinal = horaFinal;
 		this.horaInicial = horaInicial;
 		this.numEmpleados = numEmpleados;
@@ -44,14 +42,6 @@ public class Limpieza {
 
 	public void setIdLimpieza(int idLimpieza) {
 		this.idLimpieza = idLimpieza;
-	}
-
-	public int getIdSupervisor() {
-		return idSupervisor;
-	}
-
-	public void setIdSupervisor(int idSupervisor) {
-		this.idSupervisor = idSupervisor;
 	}
 
 	public LocalTime getHoraFinal() {

@@ -7,14 +7,11 @@ import javax.persistence.Embeddable;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@SuppressWarnings("serial")
 @Embeddable
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "hander" })
-public class IdPedidoArticulo implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class IdPedidoArticulo implements Serializable {
 
 	@Column(name = "idPedido")
 	private int idPedido;

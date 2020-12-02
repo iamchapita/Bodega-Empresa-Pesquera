@@ -28,10 +28,10 @@ public class Empleado {
 
 	@OneToMany(mappedBy = "supervisor", fetch = FetchType.EAGER)
 	private List<Limpieza> limpiezas;
-	
+
 	@OneToMany(mappedBy = "vendedor", fetch = FetchType.EAGER)
 	private List<Factura> facturas;
-	
+
 	public Empleado() {
 	}
 

@@ -20,8 +20,11 @@ public class Pescado {
 	private double tamanioPromedio;
 	private String tipo;
 
-	@OneToMany(mappedBy = "idCargamento", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "pescado", fetch = FetchType.EAGER)
 	private List<Cargamento> cargamentos;
+	
+	@OneToMany(mappedBy = "pescado", fetch = FetchType.EAGER)
+	private List<Producto> productos;
 
 	public Pescado() {
 	}
