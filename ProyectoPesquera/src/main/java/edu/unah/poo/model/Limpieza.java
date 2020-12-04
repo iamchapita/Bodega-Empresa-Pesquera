@@ -1,11 +1,13 @@
 package edu.unah.poo.model;
 
-import java.time.LocalTime;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -17,23 +19,27 @@ public class Limpieza {
 
 	@Id
 	private int idLimpieza;
-	private LocalTime horaFinal;
-	private LocalTime horaInicial;
+	private String horaFinal;
+	private String horaInicio;
 	private int numEmpleados;
 
 	@ManyToOne
-	@JoinColumn(name = "idEmpleado")
+	@JoinColumn(name = "idSupervisor")
 	@JsonBackReference
 	private Empleado supervisor;
+
+	@OneToMany(mappedBy = "limpieza", fetch = FetchType.EAGER)
+	private List<Cargamento> cargamentos;
 
 	public Limpieza() {
 	}
 
-	public Limpieza(int idLimpieza, LocalTime horaFinal, LocalTime horaInicial, int numEmpleados) {
+	public Limpieza(int idLimpieza, String horaFinal, String horaInicio, int numEmpleados, Empleado supervisor) {
 		this.idLimpieza = idLimpieza;
 		this.horaFinal = horaFinal;
-		this.horaInicial = horaInicial;
+		this.horaInicio = horaInicio;
 		this.numEmpleados = numEmpleados;
+		this.supervisor = supervisor;
 	}
 
 	public int getIdLimpieza() {
@@ -44,20 +50,20 @@ public class Limpieza {
 		this.idLimpieza = idLimpieza;
 	}
 
-	public LocalTime getHoraFinal() {
+	public String getHoraFinal() {
 		return horaFinal;
 	}
 
-	public void setHoraFinal(LocalTime horaFinal) {
+	public void setHoraFinal(String horaFinal) {
 		this.horaFinal = horaFinal;
 	}
 
-	public LocalTime getHoraInicial() {
-		return horaInicial;
+	public String getHoraInicio() {
+		return horaInicio;
 	}
 
-	public void setHoraInicial(LocalTime horaInicial) {
-		this.horaInicial = horaInicial;
+	public void setHoraInicio(String horaInicio) {
+		this.horaInicio = horaInicio;
 	}
 
 	public int getNumEmpleados() {
@@ -66,6 +72,22 @@ public class Limpieza {
 
 	public void setNumEmpleados(int numEmpleados) {
 		this.numEmpleados = numEmpleados;
+	}
+
+	public Empleado getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(Empleado supervisor) {
+		this.supervisor = supervisor;
+	}
+
+	public List<Cargamento> getCargamentos() {
+		return cargamentos;
+	}
+
+	public void setCargamentos(List<Cargamento> cargamentos) {
+		this.cargamentos = cargamentos;
 	}
 
 }

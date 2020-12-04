@@ -1,6 +1,5 @@
 package edu.unah.poo.model;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -17,8 +16,8 @@ public class Empleado {
 	@Id
 	private int idEmpleado;
 	private String direccion;
-	private LocalDate fechaContrato;
-	private LocalDate fechaNacimiento;
+	private String fechaContrato;
+	private String fechaNacimiento;
 	private String nombre;
 	private String puesto;
 	private String telefono;
@@ -26,16 +25,16 @@ public class Empleado {
 	@OneToMany(mappedBy = "empleado", fetch = FetchType.EAGER)
 	private List<Cargamento> cargamentos;
 
-	@OneToMany(mappedBy = "supervisor", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "supervisor", fetch = FetchType.LAZY)
 	private List<Limpieza> limpiezas;
 
-	@OneToMany(mappedBy = "vendedor", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "vendedor", fetch = FetchType.LAZY)
 	private List<Factura> facturas;
 
 	public Empleado() {
 	}
 
-	public Empleado(int idEmpleado, String direccion, LocalDate fechaContrato, LocalDate fechaNacimiento, String nombre,
+	public Empleado(int idEmpleado, String direccion, String fechaContrato, String fechaNacimiento, String nombre,
 			String puesto, String telefono) {
 		this.idEmpleado = idEmpleado;
 		this.direccion = direccion;
@@ -62,19 +61,19 @@ public class Empleado {
 		this.direccion = direccion;
 	}
 
-	public LocalDate getFechaContrato() {
+	public String getFechaContrato() {
 		return fechaContrato;
 	}
 
-	public void setFechaContrato(LocalDate fechaContrato) {
+	public void setFechaContrato(String fechaContrato) {
 		this.fechaContrato = fechaContrato;
 	}
 
-	public LocalDate getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
@@ -101,5 +100,4 @@ public class Empleado {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-
 }

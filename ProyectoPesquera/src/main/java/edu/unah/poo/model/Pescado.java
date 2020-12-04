@@ -22,8 +22,8 @@ public class Pescado {
 
 	@OneToMany(mappedBy = "pescado", fetch = FetchType.EAGER)
 	private List<Cargamento> cargamentos;
-	
-	@OneToMany(mappedBy = "pescado", fetch = FetchType.EAGER)
+
+	@OneToMany(mappedBy = "pescado", fetch = FetchType.LAZY)
 	private List<Producto> productos;
 
 	public Pescado() {
@@ -76,5 +76,4 @@ public class Pescado {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-
 }

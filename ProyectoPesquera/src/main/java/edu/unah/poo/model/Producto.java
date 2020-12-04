@@ -1,5 +1,6 @@
 package edu.unah.poo.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,11 +12,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "Producto")
-
-public class Producto {
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+public class Producto implements Serializable{
 
 	@Id
 	private int idProducto;
@@ -30,7 +33,8 @@ public class Producto {
 	@JsonBackReference
 	private Pescado pescado;
 	
-	@OneToMany(mappedBy = "Producto")
+	@OneToMany(mappedBy = "producto")
+	@JsonBackReference
 	private List<ProductoFactura> productosFacturas;
 
 	public Producto() {

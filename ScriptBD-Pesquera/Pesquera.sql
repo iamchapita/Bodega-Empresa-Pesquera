@@ -1,21 +1,20 @@
 create database Pesquera;
 use Pesquera;
 
-CREATE TABLE Proveedor (
-    idProveedor INT PRIMARY KEY,
-    nombre VARCHAR(25)
-);
-
 CREATE TABLE Cargamento (
     idCargamento INT PRIMARY KEY,
     idEmpleado INT,
+    idLimpieza INT,
     idPescado INT,
     idProveedor INT,
     calidad INT,
     estado VARCHAR(20),
-    pesoGlobal INT,
+    pesoGlobal DOUBLE,
+    precioKilo DOUBLE,
     FOREIGN KEY (idEmpleado)
         REFERENCES Empleado (idEmpleado),
+    FOREIGN KEY (idLimpieza)
+        REFERENCES Limpieza (idLimpieza),
     FOREIGN KEY (idPescado)
         REFERENCES Pescado (idPescado),
     FOREIGN KEY (idProveedor)
@@ -32,32 +31,33 @@ CREATE TABLE Empleado (
     telefono VARCHAR(25)
 );
 
+CREATE TABLE Factura (
+    idFactura INT PRIMARY KEY,
+    idEmpleado INT,
+    fecha VARCHAR(25),
+    isv DOUBLE,
+    lugarVenta VARCHAR(50),
+    total DOUBLE,
+    FOREIGN KEY (idEmpleado)
+        REFERENCES Empleado (idEmpleado)
+);
+
+CREATE TABLE Limpieza (
+    idLimpieza INT PRIMARY KEY,
+    idSupervisor INT,
+    horaFinal VARCHAR(50),
+    horaInicio VARCHAR(50),
+    numEmpleados INT,
+    FOREIGN KEY (idSupervisor)
+        REFERENCES Empleado (idEmpleado)
+);
+
 CREATE TABLE Pescado (
     idPescado INT PRIMARY KEY,
     color VARCHAR(20),
     nombre VARCHAR(20),
     tamanioPromedio DOUBLE,
     tipo VARCHAR(20)
-);
-
-CREATE TABLE CargamentoLimpieza (
-    idCargamento INT,
-    idProveedor INT,
-    PRIMARY KEY (idCargamento , idProveedor),
-    FOREIGN KEY (idCargamento)
-        REFERENCES Cargamento (idCargamento),
-    FOREIGN KEY (idProveedor)
-        REFERENCES Proveedor (idProveedor)
-);
-
-CREATE TABLE Limpieza (
-    idLimpieza INT PRIMARY KEY,
-    idSupervisor INT,
-    horaFinal VARCHAR(20),
-    horaInicio VARCHAR(20),
-    numEmpleados INT,
-    FOREIGN KEY (idSupervisor)
-        REFERENCES Empleado (idEmpleado)
 );
 
 CREATE TABLE Producto (
@@ -84,15 +84,21 @@ CREATE TABLE ProductoFactura (
         REFERENCES Producto (idProducto)
 );
 
-
-CREATE TABLE Factura (
-    idFactura INT PRIMARY KEY,
-    idEmpleado INT,
-    fecha VARCHAR(25),
-    isv DOUBLE,
-    lugarVenta VARCHAR(50),
-    total DOUBLE,
-    FOREIGN KEY (idEmpleado)
-        REFERENCES Empleado (idEmpleado)
+CREATE TABLE Proveedor (
+    idProveedor INT PRIMARY KEY,
+    nombre VARCHAR(25)
 );
 
+
+use Pesquera;
+insert into Empleado values(0,"N/A","N/A","N/A","N/A","N/A","N/A");
+insert into Limpieza values(0,0,"N/A","N/A",0);
+
+SELECT * FROM Proveedor;
+SELECT * FROM Empleado;
+SELECT * FROM Limpieza;
+SELECT * FROM Cargamento;
+
+DELETE FROM Cargamento;
+DELETE FROM Limpieza;
+DELETE FROM Empleado;

@@ -19,7 +19,7 @@ public class Proveedor {
 
 	@OneToMany(mappedBy = "proveedor", fetch = FetchType.EAGER)
 	private List<Cargamento> cargamentos;
-	
+
 	public Proveedor() {
 	}
 
@@ -43,5 +43,4 @@ public class Proveedor {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
 }

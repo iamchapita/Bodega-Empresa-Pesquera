@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 public class IdProductoFactura implements Serializable {
 
-	@Column(name="idProducto")
+	@Column(name = "idProducto")
 	private int idProducto;
-	@Column(name="idFactura")
+	@Column(name = "idFactura")
 	private int idFactura;
 
 	public IdProductoFactura() {

@@ -27,21 +27,22 @@ public class Factura {
 	@ManyToOne
 	@JoinColumn(name = "idEmpleado")
 	@JsonBackReference
-	private Empleado vendendor;
+	private Empleado vendedor;
 
-	@OneToMany(mappedBy = "Factura")
+	@OneToMany(mappedBy = "factura")
+	@JsonBackReference
 	private List<ProductoFactura> productosFacturas;
 
 	public Factura() {
 	}
 
-	public Factura(int idFactura, LocalDate fecha, double isv, String lugarVenta, double total, Empleado vendendor) {
+	public Factura(int idFactura, LocalDate fecha, double isv, String lugarVenta, double total, Empleado vendedor) {
 		this.idFactura = idFactura;
 		this.fecha = fecha;
 		this.isv = isv;
 		this.lugarVenta = lugarVenta;
 		this.total = total;
-		this.vendendor = vendendor;
+		this.vendedor = vendedor;
 	}
 
 	public int getIdFactura() {
@@ -84,12 +85,12 @@ public class Factura {
 		this.total = total;
 	}
 
-	public Empleado getVendendor() {
-		return vendendor;
+	public Empleado getVendedor() {
+		return vendedor;
 	}
 
-	public void setVendendor(Empleado vendendor) {
-		this.vendendor = vendendor;
+	public void setVendendor(Empleado vendedor) {
+		this.vendedor = vendedor;
 	}
 
 }

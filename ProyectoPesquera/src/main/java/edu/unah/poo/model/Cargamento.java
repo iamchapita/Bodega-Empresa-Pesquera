@@ -36,15 +36,15 @@ public class Cargamento {
 	private Empleado empleado;
 
 	@ManyToOne
-	@JoinColumn(name="idCargamento")
+	@JoinColumn(name = "idLimpieza")
 	@JsonBackReference
-	private CargamentoLimpieza cargamentoLimpieza;
-	
+	private Limpieza limpieza;
+
 	public Cargamento() {
 	}
 
 	public Cargamento(int idCargamento, int calidad, String estado, double pesoGlobal, double precioKilo,
-			Proveedor proveedor, Pescado pescado, Empleado empleado) {
+			Proveedor proveedor, Pescado pescado, Empleado empleado, Limpieza limpieza) {
 		this.idCargamento = idCargamento;
 		this.calidad = calidad;
 		this.estado = estado;
@@ -53,70 +53,79 @@ public class Cargamento {
 		this.proveedor = proveedor;
 		this.pescado = pescado;
 		this.empleado = empleado;
+		this.limpieza = limpieza;
 	}
 
 	public int getIdCargamento() {
 		return idCargamento;
 	}
 
-	public void setIdCargamento(int idCargamento) {
-		this.idCargamento = idCargamento;
-	}
-
 	public int getCalidad() {
 		return calidad;
-	}
-
-	public void setCalidad(int calidad) {
-		this.calidad = calidad;
 	}
 
 	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
 	public double getPesoGlobal() {
 		return pesoGlobal;
-	}
-
-	public void setPesoGlobal(double pesoGlobal) {
-		this.pesoGlobal = pesoGlobal;
 	}
 
 	public double getPrecioKilo() {
 		return precioKilo;
 	}
 
-	public void setPrecioKilo(double precioKilo) {
-		this.precioKilo = precioKilo;
-	}
-
 	public Proveedor getProveedor() {
 		return proveedor;
 	}
-
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
-	}
-
+	
 	public Pescado getPescado() {
 		return pescado;
-	}
-
-	public void setPescado(Pescado pescado) {
-		this.pescado = pescado;
 	}
 
 	public Empleado getEmpleado() {
 		return empleado;
 	}
 
+	public Limpieza getLimpieza() {
+		return limpieza;
+	}
+
+	public void setIdCargamento(int idCargamento) {
+		this.idCargamento = idCargamento;
+	}
+
+	public void setCalidad(int calidad) {
+		this.calidad = calidad;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public void setPesoGlobal(double pesoGlobal) {
+		this.pesoGlobal = pesoGlobal;
+	}
+
+	public void setPrecioKilo(double precioKilo) {
+		this.precioKilo = precioKilo;
+	}
+
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
+	}
+
+	public void setPescado(Pescado pescado) {
+		this.pescado = pescado;
+	}
+
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
+	}
+
+	public void setLimpieza(Limpieza limpieza) {
+		this.limpieza = limpieza;
 	}
 
 }

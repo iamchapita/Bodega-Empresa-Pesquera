@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -15,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "ProductoFactura")
-@IdClass(IdProductoFactura.class)
 @JsonIgnoreProperties({ "hibernatyLazyInitializer", "handler" })
 
 public class ProductoFactura implements Serializable {
@@ -26,12 +24,12 @@ public class ProductoFactura implements Serializable {
 	private double precio;
 
 	@ManyToOne
-	@MapsId("idFactura")
+	@MapsId("idFacturaProducto")
 	@JoinColumn(name = "idFactura")
 	Factura factura;
 
 	@ManyToOne
-	@MapsId("idProducto")
+	@MapsId("idProductoFactura")
 	@JoinColumn(name = "idProducto")
 	Producto producto;
 
