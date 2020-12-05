@@ -2,13 +2,11 @@ package edu.unah.poo.controller;
 
 import java.util.List;
 
-import org.aspectj.apache.bcel.classfile.NestHost;
-import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import edu.unah.poo.model.Cargamento;
 import edu.unah.poo.model.Empleado;
@@ -28,7 +26,7 @@ import edu.unah.poo.service.ServiceProducto;
 import edu.unah.poo.service.ServiceProductoFactura;
 import edu.unah.poo.service.ServiceProveedor;
 
-@RestController
+@org.springframework.stereotype.Controller
 public class Controller {
 
 	@Autowired
@@ -48,6 +46,16 @@ public class Controller {
 	@Autowired
 	ServiceProveedor serviceProveedor;
 
+	@GetMapping("/inicio")
+	public String index() {
+		return "inicio";
+	}
+	
+	@GetMapping("/facturacion")
+	public String facturacion() {
+		return "facturacion";
+	}
+	
 // ===================================================================================================================================
 // Cargamento
 // ===================================================================================================================================
