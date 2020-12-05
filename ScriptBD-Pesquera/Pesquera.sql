@@ -8,7 +8,7 @@ CREATE TABLE Cargamento (
     idPescado INT,
     idProveedor INT,
     calidad INT,
-    estado VARCHAR(20),
+    estado VARCHAR(50),
     pesoGlobal DOUBLE,
     precioKilo DOUBLE,
     FOREIGN KEY (idEmpleado)
@@ -24,17 +24,17 @@ CREATE TABLE Cargamento (
 CREATE TABLE Empleado (
     idEmpleado INT PRIMARY KEY,
     direccion VARCHAR(50),
-    fechaContrato VARCHAR(20),
-    fechaNacimiento VARCHAR(20),
+    fechaContrato VARCHAR(50),
+    fechaNacimiento VARCHAR(50),
     nombre VARCHAR(50),
-    puesto VARCHAR(20),
-    telefono VARCHAR(25)
+    puesto VARCHAR(50),
+    telefono VARCHAR(50)
 );
 
 CREATE TABLE Factura (
     idFactura INT PRIMARY KEY,
     idEmpleado INT,
-    fecha VARCHAR(25),
+    fecha VARCHAR(50),
     isv DOUBLE,
     lugarVenta VARCHAR(50),
     total DOUBLE,
@@ -54,18 +54,20 @@ CREATE TABLE Limpieza (
 
 CREATE TABLE Pescado (
     idPescado INT PRIMARY KEY,
-    color VARCHAR(20),
-    nombre VARCHAR(20),
+    color VARCHAR(50),
+    nombre VARCHAR(50),
     tamanioPromedio DOUBLE,
-    tipo VARCHAR(20)
+    tipo VARCHAR(50)
 );
+
+drop table Producto;
 
 CREATE TABLE Producto (
     idProducto INT PRIMARY KEY,
     idPescado INT,
     cantidadLatas INT,
-    descripcion VARCHAR(25),
-    fecha VARCHAR(20),
+    descripcion VARCHAR(50),
+    fechaElab VARCHAR(50),
     peso DOUBLE,
     precio DOUBLE,
     FOREIGN KEY (idPescado)
@@ -86,7 +88,7 @@ CREATE TABLE ProductoFactura (
 
 CREATE TABLE Proveedor (
     idProveedor INT PRIMARY KEY,
-    nombre VARCHAR(25)
+    nombre VARCHAR(50)
 );
 
 
@@ -98,6 +100,7 @@ SELECT * FROM Proveedor;
 SELECT * FROM Empleado;
 SELECT * FROM Limpieza;
 SELECT * FROM Cargamento;
+SELECT * FROM Producto;
 
 DELETE FROM Cargamento;
 DELETE FROM Limpieza;

@@ -38,7 +38,7 @@ CREATE TABLE Repara (
     FOREIGN KEY (idMecanico)
         REFERENCES Mecanico (idMecanico)
 );
-
+use TallerMecanico;
 
 delete from Cliente;
 delete from Auto;
@@ -46,4 +46,4 @@ delete from Mecanico;
 delete from Repara;
 
 
-
+select * from Cliente;

@@ -1,7 +1,6 @@
 package edu.unah.poo.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -24,7 +23,7 @@ public class Producto implements Serializable{
 	private int idProducto;
 	private int cantidadLatas;
 	private String descripcion;
-	private LocalDate fechaElab;
+	private String fechaElab;
 	private double peso;
 	private double precio;
 
@@ -40,7 +39,7 @@ public class Producto implements Serializable{
 	public Producto() {
 	}
 
-	public Producto(int idProducto, int cantidadLatas, String descripcion, LocalDate fechaElab, double peso,
+	public Producto(int idProducto, int cantidadLatas, String descripcion, String fechaElab, double peso,
 			double precio, Pescado pescado) {
 		this.idProducto = idProducto;
 		this.cantidadLatas = cantidadLatas;
@@ -75,11 +74,11 @@ public class Producto implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public LocalDate getFechaElab() {
+	public String getFechaElab() {
 		return fechaElab;
 	}
 
-	public void setFechaElab(LocalDate fechaElab) {
+	public void setFechaElab(String fechaElab) {
 		this.fechaElab = fechaElab;
 	}
 

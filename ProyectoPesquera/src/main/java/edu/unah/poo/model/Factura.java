@@ -1,6 +1,5 @@
 package edu.unah.poo.model;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -19,7 +18,7 @@ public class Factura {
 
 	@Id
 	private int idFactura;
-	private LocalDate fecha;
+	private String fecha;
 	private double isv;
 	private String lugarVenta;
 	private double total;
@@ -36,7 +35,7 @@ public class Factura {
 	public Factura() {
 	}
 
-	public Factura(int idFactura, LocalDate fecha, double isv, String lugarVenta, double total, Empleado vendedor) {
+	public Factura(int idFactura, String fecha, double isv, String lugarVenta, double total, Empleado vendedor) {
 		this.idFactura = idFactura;
 		this.fecha = fecha;
 		this.isv = isv;
@@ -53,11 +52,11 @@ public class Factura {
 		this.idFactura = idFactura;
 	}
 
-	public LocalDate getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 
