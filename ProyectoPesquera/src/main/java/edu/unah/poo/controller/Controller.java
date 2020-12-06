@@ -61,6 +61,7 @@ public class Controller {
 		return "facturacion";
 	}
 	
+	
 // ===================================================================================================================================
 // Cargamento
 // ===================================================================================================================================
@@ -99,8 +100,13 @@ public class Controller {
 // Empleado
 // ===================================================================================================================================
 
-	@RequestMapping(value = "empleado/crearEmpleado", method = RequestMethod.GET)
-	public Empleado crearEmpleado(@RequestParam("idEmpleado") int idEmpleado,
+	@GetMapping(value="/empleado")
+	public String empleado() {
+		return "empleado";
+	}
+	
+	@RequestMapping(value = "empleado/crearEmpleado", method = RequestMethod.POST)
+	public String crearEmpleado(@RequestParam("idEmpleado") int idEmpleado,
 			@RequestParam("direccion") String direccion, @RequestParam(name = "fechaContrato") String fechaContrato,
 			@RequestParam(name = "fechaNacimiento") String fechaNacimiento,
 			@RequestParam(name = "nombre") String nombre, @RequestParam(name = "puesto") String puesto,
@@ -109,7 +115,8 @@ public class Controller {
 		Empleado empleado = new Empleado(idEmpleado, direccion, fechaContrato, fechaNacimiento, nombre, puesto,
 				telefono);
 
-		return this.serviceEmpleado.crearEmpleado(empleado);
+		this.serviceEmpleado.crearEmpleado(empleado);
+		return "inicio";
 	}
 
 	@RequestMapping(value = "empleado/listaEmpleados", method = RequestMethod.GET)
@@ -204,14 +211,21 @@ public class Controller {
 // Pescado
 // ===================================================================================================================================
 
-	@RequestMapping(value = "/pescado/crearPescado", method = RequestMethod.GET)
-	public Pescado crearPescado(@RequestParam(name = "idPescado") int idPescado,
+	@GetMapping(value="/pescado")
+	public String pescado() {
+		return "pescado";
+	}
+	
+	@RequestMapping(value = "/pescado/crearPescado", method = RequestMethod.POST)
+	public String crearPescado(@RequestParam(name = "idPescado") int idPescado,
 			@RequestParam(name = "color") String color, @RequestParam(name = "nombre") String nombre,
 			@RequestParam(name = "tamanioPromedio") double tamanioPromedio, @RequestParam(name = "tipo") String tipo) {
 
 		Pescado pescado = new Pescado(idPescado, color, nombre, tamanioPromedio, tipo);
 
-		return this.servicePescado.crearPescado(pescado);
+		this.servicePescado.crearPescado(pescado);
+		
+		return "inicio"; 
 	}
 
 	@RequestMapping(value = "/pescado/listaPescados", method = RequestMethod.GET)

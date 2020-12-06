@@ -60,8 +60,6 @@ CREATE TABLE Pescado (
     tipo VARCHAR(50)
 );
 
-drop table Producto;
-
 CREATE TABLE Producto (
     idProducto INT PRIMARY KEY,
     idPescado INT,
@@ -101,6 +99,9 @@ SELECT * FROM Empleado;
 SELECT * FROM Limpieza;
 SELECT * FROM Cargamento;
 SELECT * FROM Producto;
+SELECT * FROM Factura;
+SELECT * FROM ProductoFactura;
+SELECT * FROM Pescado;
 
 DELETE FROM Cargamento;
 DELETE FROM Limpieza;
