@@ -46,8 +46,13 @@ public class Controller {
 	@Autowired
 	ServiceProveedor serviceProveedor;
 
-	@GetMapping("/inicio")
+	@GetMapping("/")
 	public String index() {
+		return "inicio";
+	}
+	
+	@GetMapping("/inicio")
+	public String inicio() {
 		return "inicio";
 	}
 	
@@ -288,13 +293,19 @@ public class Controller {
 // Proveedor
 // ===================================================================================================================================
 
-	@RequestMapping(value = "proveedor/crearProveedor", method = RequestMethod.GET)
-	public Proveedor crearProveedor(@RequestParam(name = "idProveedor") int idProveedor,
+	@GetMapping(value="/proveedor")
+	public String proveedor() {
+		return "proveedor";
+	}
+	
+	@RequestMapping(value = "/proveedor/crearProveedor", method = RequestMethod.POST)
+	public String crearProveedor(@RequestParam(name = "idProveedor") int idProveedor,
 			@RequestParam(name = "nombre") String nombre) {
 
 		Proveedor objProveedor = new Proveedor(idProveedor, nombre);
-
-		return this.serviceProveedor.crearProveedor(objProveedor);
+		this.serviceProveedor.crearProveedor(objProveedor);
+		
+		return "inicio";
 	}
 
 	@RequestMapping(value = "proveedor/listaProveedores", method = RequestMethod.GET)
