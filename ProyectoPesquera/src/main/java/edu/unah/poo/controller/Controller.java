@@ -1,12 +1,16 @@
 package edu.unah.poo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.sun.xml.bind.marshaller.DumbEscapeHandler;
 
 import edu.unah.poo.model.Cargamento;
 import edu.unah.poo.model.Empleado;
@@ -50,44 +54,65 @@ public class Controller {
 	public String index() {
 		return "inicio";
 	}
-	
+
 	@GetMapping("/inicio")
 	public String inicio() {
 		return "inicio";
 	}
-	
+
 	@GetMapping("/facturacion")
 	public String facturacion() {
 		return "facturacion";
 	}
-	
-	
+
+	@GetMapping("/consulta")
+	public String consulta() {
+		return "consulta";
+	}
+
 // ===================================================================================================================================
 // Cargamento
 // ===================================================================================================================================
 
-	@RequestMapping(value = "/cargamento/crearCargamento", method = RequestMethod.GET)
-	public Cargamento crearCargamento(@RequestParam(name = "idCargamento") int idCargamento,
+	@GetMapping(value = "/cargamento")
+	public String cargamento(Model model) {
+		List<Empleado> empleados = this.serviceEmpleado.listaEmpleados();
+		List<Pescado> pescados = this.servicePescado.listaPescados();
+		List<Proveedor> proveedores = this.serviceProveedor.listaProveedores();
+		model.addAttribute("empleados", empleados);
+		model.addAttribute("pescados", pescados);
+		model.addAttribute("proveedores", proveedores);
+
+		return "cargamento";
+	}
+
+	@RequestMapping(value = "/cargamento/crearCargamento", method = RequestMethod.POST)
+	public String crearCargamento(@RequestParam(name = "idCargamento") int idCargamento,
 			@RequestParam(name = "calidad") int calidad, @RequestParam(name = "estado") String estado,
-			@RequestParam(name = "pesoGlobal") double pesoGlobal, @RequestParam(name = "precioKilo") double precioKilo,
-			@RequestParam(name = "idProveedor") int idProveedor, @RequestParam(name = "idPescado") int idPescado,
-			@RequestParam(name = "idEmpleado") int idEmpleado, @RequestParam(name = "idLimpieza") int idLimpieza) {
+			@RequestParam(name = "pesoGlobal") String pesoGlobal, @RequestParam(name = "precioKilo") String precioKilo,
+			@RequestParam(name = "idProveedor") String idProveedor, @RequestParam(name = "idPescado") String idPescado,
+			@RequestParam(name = "idEmpleado") String idEmpleado) {
 
-		Proveedor proveedor = serviceProveedor.buscarProveedor(idProveedor);
-		Pescado pescado = servicePescado.buscarPescado(idPescado);
-		Empleado empleado = serviceEmpleado.buscarEmpleado(idEmpleado);
-		Limpieza limpieza = serviceLimpieza.buscarLimpieza(idLimpieza);
+		Proveedor proveedor = serviceProveedor.buscarProveedor(Integer.parseInt(idProveedor));
+		Pescado pescado = servicePescado.buscarPescado(Integer.parseInt(idPescado));
+		Empleado empleado = serviceEmpleado.buscarEmpleado(Integer.parseInt(idEmpleado));
+		Limpieza limpieza = serviceLimpieza.buscarLimpieza(0);
 
-		Cargamento objCargamento = new Cargamento(idCargamento, calidad, estado, pesoGlobal, precioKilo, proveedor,
-				pescado, empleado, limpieza);
+		Cargamento objCargamento = new Cargamento(idCargamento, calidad, estado, Double.parseDouble(pesoGlobal),
+				Double.parseDouble(precioKilo), proveedor, pescado, empleado, limpieza);
 
-		return this.serviceCargamento.crearCargamento(objCargamento);
+		this.serviceCargamento.crearCargamento(objCargamento);
+		
+		return "redirect:/cargamento";
 	}
 
 	@RequestMapping(value = "cargamento/listaCargamentos", method = RequestMethod.GET)
-	public List<Cargamento> listaCargamento() {
+	public String listaCargamento(Model model) {
 
-		return this.serviceCargamento.listaCargamentos();
+		List<Cargamento> cargamentos =  this.serviceCargamento.listaCargamentos();
+		model.addAttribute("cargamentos", cargamentos);
+		
+		return "/consultas/listadoCargamentos"; 
 	}
 
 	@RequestMapping(value = "cargamento/buscarCargamento", method = RequestMethod.GET)
@@ -100,14 +125,14 @@ public class Controller {
 // Empleado
 // ===================================================================================================================================
 
-	@GetMapping(value="/empleado")
+	@GetMapping(value = "/empleado")
 	public String empleado() {
 		return "empleado";
 	}
-	
+
 	@RequestMapping(value = "empleado/crearEmpleado", method = RequestMethod.POST)
-	public String crearEmpleado(@RequestParam("idEmpleado") int idEmpleado,
-			@RequestParam("direccion") String direccion, @RequestParam(name = "fechaContrato") String fechaContrato,
+	public String crearEmpleado(@RequestParam("idEmpleado") int idEmpleado, @RequestParam("direccion") String direccion,
+			@RequestParam(name = "fechaContrato") String fechaContrato,
 			@RequestParam(name = "fechaNacimiento") String fechaNacimiento,
 			@RequestParam(name = "nombre") String nombre, @RequestParam(name = "puesto") String puesto,
 			@RequestParam(name = "telefono") String telefono) {
@@ -116,13 +141,16 @@ public class Controller {
 				telefono);
 
 		this.serviceEmpleado.crearEmpleado(empleado);
-		return "inicio";
+		return "redirect:/empleado";
 	}
 
 	@RequestMapping(value = "empleado/listaEmpleados", method = RequestMethod.GET)
-	public List<Empleado> listaEmpleados() {
+	public String listaEmpleados(Model model) {
 
-		return this.serviceEmpleado.listaEmpleados();
+		List<Empleado> empleados = this.serviceEmpleado.listaEmpleados();
+		model.addAttribute("empleados", empleados);
+
+		return "consultas/listadoEmpleados";
 	}
 
 	@RequestMapping(value = "empleado/buscarEmpleado", method = RequestMethod.GET)
@@ -137,14 +165,12 @@ public class Controller {
 
 	@RequestMapping(value = "/factura/crearFactura", method = RequestMethod.GET)
 	public Factura crearFactura(@RequestParam(name = "idFactura") int idFactura,
-			@RequestParam(value = "fecha") String fecha,
-			@RequestParam(value = "lugarVenta") String lugarVenta,
-			@RequestParam(value = "total") double total,
-			@RequestParam(value = "idVendedor") int idVendedor) {
+			@RequestParam(value = "fecha") String fecha, @RequestParam(value = "lugarVenta") String lugarVenta,
+			@RequestParam(value = "total") double total, @RequestParam(value = "idVendedor") int idVendedor) {
 
 		Empleado vendedor = this.serviceEmpleado.buscarEmpleado(idVendedor);
-		double isv = total*0.15;
-		
+		double isv = total * 0.15;
+
 		Factura factura = new Factura(idFactura, fecha, isv, lugarVenta, total, vendedor);
 
 		return this.serviceFactura.crearFactura(factura);
@@ -161,7 +187,7 @@ public class Controller {
 
 		return this.serviceFactura.buscarFactura(idFactura);
 	}
-	
+
 	@SuppressWarnings("unused")
 	private double obtenerTotal(int idFactura) {
 
@@ -172,27 +198,56 @@ public class Controller {
 
 			int idProducto = productos.get(i).getIdProducto();
 			ProductoFactura productoFactura = this.buscarProductoFactura(idProducto, idFactura);
-			total = total + productoFactura.getPrecio();	
+			total = total + productoFactura.getPrecio();
 		}
-		
+
 		return total;
 	}
 
-		
 // ===================================================================================================================================
 // Limpieza
 // ===================================================================================================================================
 
-	@RequestMapping(value = "/limpieza/crearLimpieza", method = RequestMethod.GET)
-	public Limpieza crearLimpieza(@RequestParam(name = "idLimpieza") int idLimpieza,
+	@GetMapping(value = "/limpieza")
+	public String limpieza(Model model) {
+
+		List<Empleado> empleados = this.serviceEmpleado.listaEmpleados();
+		List<Cargamento> cargamentos = this.serviceCargamento.listaCargamentos();
+		List<Empleado> empleadosLimpieza = new ArrayList<Empleado>();
+
+		for (int i = 0; i < empleados.size(); i++) {
+			if (empleados.get(i).getPuesto().contains("Limpieza")) {
+				empleadosLimpieza.add(empleados.get(i));
+			}
+		}
+		
+		model.addAttribute("supervisores", empleados);
+		model.addAttribute("empleados", empleadosLimpieza);
+		model.addAttribute("cargamentos", cargamentos);
+
+		return "limpieza";
+	}
+
+	@RequestMapping(value = "/limpieza/crearLimpieza", method = RequestMethod.POST)
+	public String crearLimpieza(@RequestParam(name = "idLimpieza") int idLimpieza,
 			@RequestParam(name = "horaFinal") String horaFinal, @RequestParam(name = "horaInicial") String horaInicial,
 			@RequestParam(name = "idSupervisor") int idSupervisor,
-			@RequestParam(name = "numEmpleados") int numEmpleados) {
+			@RequestParam(name = "numEmpleados") int numEmpleados, @RequestParam(name = "idCargamentos") String idCargamentos) {
 
+		String [] tmp = idCargamentos.split(",");
 		Empleado supervisor = this.serviceEmpleado.buscarEmpleado(idSupervisor);
 		Limpieza limpieza = new Limpieza(idLimpieza, horaFinal, horaInicial, numEmpleados, supervisor);
-
-		return this.serviceLimpieza.crearLimpieza(limpieza);
+		
+		this.serviceLimpieza.crearLimpieza(limpieza);
+		
+		for(int i=0; i<= tmp.length-1; i++){
+		    
+			Cargamento cargamento = this.serviceCargamento.buscarCargamento(Integer.parseInt(tmp[i]));
+			cargamento.setLimpieza(limpieza);
+			this.serviceCargamento.crearCargamento(cargamento);
+		}
+		
+		return "redirect:/limpieza";
 	}
 
 	@RequestMapping(value = "/limpieza/listaLimpiezas", method = RequestMethod.GET)
@@ -211,11 +266,11 @@ public class Controller {
 // Pescado
 // ===================================================================================================================================
 
-	@GetMapping(value="/pescado")
+	@GetMapping(value = "/pescado")
 	public String pescado() {
 		return "pescado";
 	}
-	
+
 	@RequestMapping(value = "/pescado/crearPescado", method = RequestMethod.POST)
 	public String crearPescado(@RequestParam(name = "idPescado") int idPescado,
 			@RequestParam(name = "color") String color, @RequestParam(name = "nombre") String nombre,
@@ -224,14 +279,17 @@ public class Controller {
 		Pescado pescado = new Pescado(idPescado, color, nombre, tamanioPromedio, tipo);
 
 		this.servicePescado.crearPescado(pescado);
-		
-		return "inicio"; 
+
+		return "redirect:/pescado";
 	}
 
 	@RequestMapping(value = "/pescado/listaPescados", method = RequestMethod.GET)
-	public List<Pescado> listaPescados() {
+	public String listaPescados(Model model) {
 
-		return this.servicePescado.listaPescados();
+		List<Pescado> pescados =  this.servicePescado.listaPescados();
+		model.addAttribute("pescados", pescados);
+		
+		return "/consultas/listadoPescados";
 	}
 
 	@RequestMapping(value = "/pescado/buscarPescado", method = RequestMethod.GET)
@@ -244,23 +302,37 @@ public class Controller {
 // Producto
 // ===================================================================================================================================
 
-	@RequestMapping(value = "/producto/crearProducto", method = RequestMethod.GET)
-	public Producto crearProducto(@RequestParam(value = "idProducto") int idProducto,
+	@GetMapping(value = "/producto")
+	public String producto(Model model) {
+
+		List<Pescado> pescados = this.servicePescado.listaPescados();
+		model.addAttribute("pescados", pescados);
+
+		return "producto";
+	}
+
+	@RequestMapping(value = "/producto/crearProducto", method = RequestMethod.POST)
+	public String crearProducto(@RequestParam(value = "idProducto") int idProducto,
 			@RequestParam(value = "cantidadLatas") int cantidadLatas,
 			@RequestParam(value = "descripcion") String descripcion,
-			@RequestParam(value = "fechaElab") String fechaElab, @RequestParam(value = "peso") double peso,
-			@RequestParam(value = "precio") double precio, @RequestParam(value = "idPescado") int idPescado) {
+			@RequestParam(value = "fechaElab") String fechaElab, @RequestParam(value = "fechaVenc") String fechaVenc,
+			@RequestParam(value = "peso") double peso, @RequestParam(value = "precio") double precio,
+			@RequestParam(value = "idPescado") int idPescado) {
 
 		Pescado pescado = this.servicePescado.buscarPescado(idPescado);
-		Producto producto = new Producto(idProducto, cantidadLatas, descripcion, fechaElab, peso, precio, pescado);
+		Producto producto = new Producto(idProducto, cantidadLatas, descripcion, fechaElab, fechaVenc, peso, precio, pescado);
 
-		return this.serviceProducto.crearProducto(producto);
+		this.serviceProducto.crearProducto(producto);
+		return "redirect:/producto";
 	}
 
 	@RequestMapping(value = "/producto/listaProductos")
-	public List<Producto> listaProductos() {
+	public String listaProductos(Model model) {
 
-		return this.serviceProducto.listaProductos();
+		List<Producto> productos = this.serviceProducto.listaProductos();
+		model.addAttribute("productos", productos);
+		
+		return "/consultas/listadoProductos";
 	}
 
 	@RequestMapping(value = "/producto/buscarProducto")
@@ -302,30 +374,34 @@ public class Controller {
 
 		return this.ServiceProductoFactura.buscarProductoFactura(idProductoFactura);
 	}
-	
+
 // ===================================================================================================================================
 // Proveedor
 // ===================================================================================================================================
 
-	@GetMapping(value="/proveedor")
+	@GetMapping(value = "/proveedor")
 	public String proveedor() {
 		return "proveedor";
 	}
-	
+
 	@RequestMapping(value = "/proveedor/crearProveedor", method = RequestMethod.POST)
 	public String crearProveedor(@RequestParam(name = "idProveedor") int idProveedor,
 			@RequestParam(name = "nombre") String nombre) {
 
 		Proveedor objProveedor = new Proveedor(idProveedor, nombre);
 		this.serviceProveedor.crearProveedor(objProveedor);
-		
-		return "inicio";
+
+		return "redirect:/proveedor";
 	}
 
-	@RequestMapping(value = "proveedor/listaProveedores", method = RequestMethod.GET)
-	public List<Proveedor> listaProveedores() {
+	@RequestMapping(value = "/proveedor/listaProveedores", method = RequestMethod.GET)
+	public String listaProveedores(Model model) {
 
-		return this.serviceProveedor.listaProveedores();
+		List<Proveedor> proveedores = this.serviceProveedor.listaProveedores();
+
+		model.addAttribute("proveedores", proveedores);
+
+		return "consultas/listadoProveedores";
 	}
 
 	@RequestMapping(value = "/proveedor/buscarProveedor", method = RequestMethod.GET)

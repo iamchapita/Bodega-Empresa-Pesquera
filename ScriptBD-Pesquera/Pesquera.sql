@@ -66,6 +66,7 @@ CREATE TABLE Producto (
     cantidadLatas INT,
     descripcion VARCHAR(50),
     fechaElab VARCHAR(50),
+    fechaVenc VARCHAR(50),
     peso DOUBLE,
     precio DOUBLE,
     FOREIGN KEY (idPescado)
@@ -103,6 +104,7 @@ SELECT * FROM Factura;
 SELECT * FROM ProductoFactura;
 SELECT * FROM Pescado;
 
-DELETE FROM Cargamento;
+DELETE FROM Cargamento where idCargamento=8;
 DELETE FROM Limpieza;
 DELETE FROM Empleado;
+DELETE FROM Proveedor where idProveedor=7;

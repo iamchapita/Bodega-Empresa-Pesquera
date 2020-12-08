@@ -24,6 +24,7 @@ public class Producto implements Serializable{
 	private int cantidadLatas;
 	private String descripcion;
 	private String fechaElab;
+	private String fechaVenc;
 	private double peso;
 	private double precio;
 
@@ -39,7 +40,7 @@ public class Producto implements Serializable{
 	public Producto() {
 	}
 
-	public Producto(int idProducto, int cantidadLatas, String descripcion, String fechaElab, double peso,
+	public Producto(int idProducto, int cantidadLatas, String descripcion, String fechaElab, String fechaVenc, double peso,
 			double precio, Pescado pescado) {
 		this.idProducto = idProducto;
 		this.cantidadLatas = cantidadLatas;
@@ -80,6 +81,14 @@ public class Producto implements Serializable{
 
 	public void setFechaElab(String fechaElab) {
 		this.fechaElab = fechaElab;
+	}
+	
+	public String getFechaVenc() {
+		return fechaVenc;
+	}
+
+	public void setFechaVenc(String fechaVenc) {
+		this.fechaVenc = fechaVenc;
 	}
 
 	public double getPeso() {

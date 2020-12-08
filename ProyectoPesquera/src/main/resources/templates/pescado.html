@@ -10,6 +10,7 @@
       crossorigin="anonymous"
     />
     <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    <link rel="icon" th:href="@{/images/logo.jpg}">
   </head>
   <body>
     <main role="main">
@@ -61,13 +62,17 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#" style="font-family: sans-serif"
+              <a class="nav-link" 
+              th:href="@{/consulta}" 
+              style="font-family: sans-serif"
                 >Consulta</a
               >
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#" style="font-family: sans-serif"
+              <a class="nav-link" 
+              th:href="@{/acercaDe}" 
+              style="font-family: sans-serif"
                 >Acerca De</a
               >
             </li>
@@ -78,7 +83,7 @@
       <div
         class="container"
         style="
-          margin-top: 4%;
+          margin-top: 2%;
           margin-bottom: 2%;
           font-family: sans-serif;
           text-align: center;
@@ -171,7 +176,7 @@
                             name="color"
                             aria-describedby="inputGroupPrepend"
                             required
-                            placeholder="rojo, negro, machado"
+                            placeholder="Rojo, Negro, Machado"
                           />
                           <div class="invalid-feedback">Ingrese una entrada válida</div>
                         </div>
@@ -192,7 +197,7 @@
                             aria-describedby="inputGroupPrepend"
                             required
                             placeholder="30.5"
-                            pattern="^([1-9]\d*(\.|\,)\d*|0?(\.|\,)\d*[1-9]\d*|[1-9]\d*)$"
+                            pattern="(\d+\.?\d*)"
                           />
                           <div class="invalid-feedback">
                             Ingrese un valor válido
