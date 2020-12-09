@@ -9,7 +9,6 @@
 	crossorigin="anonymous" />
 <link th:href="@{/css/styles.css}" rel="stylesheet" />
 <link rel="icon" th:href="@{/images/logo.jpg}">
-<link rel="icon" th:href="@{/images/logo.jpg}">
 </head>
 <body>
 	<main role="main">
@@ -54,31 +53,29 @@
 				<div class="card-body" style="margin-bottom: 1%">
 					<h2
 						style="text-align: center; font-weight: bold; font-family: sans-serif; margin-bottom: 1%;">
-						Tabla de Empleados</h2>
+						Tabla de Limpiezas</h2>
 					<h4
 						style="text-align: center; font-weight: bold; font-family: sans-serif; margin-bottom: 1%;">
-						Empleados Registrados en la Base de Datos</h4>
+						Limpiezas Registrados en la Base de Datos</h4>
 
 					<hr style="color: #3b5c94; border: 1px solid" />
 					<table class="table table-striped table-bordered">
 						<thead style="background-color: #3b5c94">
 							<tr style="color: white">
 								<th scope="col">Id</th>
-								<th scope="col">Nombre</th>
-								<th scope="col">Puesto</th>
-								<th scope="col">Fecha Contrato</th>
+								<th scope="col">Supervisor</th>
+								<th scope="col">Número de Empleados</th>
 								<th scope="col">Detalle</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="tmpEmpleado, fila: ${empleados}"
+							<tr th:each="limpieza,fila : ${limpiezas}"
 								th:if="${fila.count} &gt; 1">
-								<td th:text="${tmpEmpleado.idEmpleado}"></td>
-								<td th:text="${tmpEmpleado.nombre}"></td>
-								<td th:text="${tmpEmpleado.puesto}"></td>
-								<td th:text="${tmpEmpleado.fechaContrato}"></td>
+								<td th:text="${limpieza.idLimpieza}"></td>
+								<td th:text="${limpieza.supervisor.nombre}"></td>
+								<td th:text="${limpieza.numEmpleados}"></td>
 								<td><a
-									th:href="@{/empleado/detalle/{idEmpleado} (idEmpleado=${tmpEmpleado.idEmpleado})}">
+									th:href="@{/limpieza/detalle/{idLimpieza} (idLimpieza = ${limpieza.idLimpieza})}">
 										<button class="button submit">Detalle</button>
 								</a></td>
 							</tr>

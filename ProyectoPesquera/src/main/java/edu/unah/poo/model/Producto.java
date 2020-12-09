@@ -40,12 +40,13 @@ public class Producto implements Serializable{
 	public Producto() {
 	}
 
-	public Producto(int idProducto, int cantidadLatas, String descripcion, String fechaElab, String fechaVenc, double peso,
-			double precio, Pescado pescado) {
+	public Producto(int idProducto, int cantidadLatas, String descripcion, String fechaElab, String fechaVenc,
+			double peso, double precio, Pescado pescado) {
 		this.idProducto = idProducto;
 		this.cantidadLatas = cantidadLatas;
 		this.descripcion = descripcion;
 		this.fechaElab = fechaElab;
+		this.fechaVenc = fechaVenc;
 		this.peso = peso;
 		this.precio = precio;
 		this.pescado = pescado;
@@ -55,64 +56,74 @@ public class Producto implements Serializable{
 		return idProducto;
 	}
 
-	public void setIdProducto(int idProducto) {
-		this.idProducto = idProducto;
-	}
-
 	public int getCantidadLatas() {
 		return cantidadLatas;
-	}
-
-	public void setCantidadLatas(int cantidadLatas) {
-		this.cantidadLatas = cantidadLatas;
 	}
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
 	public String getFechaElab() {
 		return fechaElab;
 	}
 
-	public void setFechaElab(String fechaElab) {
-		this.fechaElab = fechaElab;
-	}
-	
 	public String getFechaVenc() {
 		return fechaVenc;
-	}
-
-	public void setFechaVenc(String fechaVenc) {
-		this.fechaVenc = fechaVenc;
 	}
 
 	public double getPeso() {
 		return peso;
 	}
 
-	public void setPeso(double peso) {
-		this.peso = peso;
-	}
-
 	public double getPrecio() {
 		return precio;
-	}
-
-	public void setPrecio(double precio) {
-		this.precio = precio;
 	}
 
 	public Pescado getPescado() {
 		return pescado;
 	}
 
+	public List<ProductoFactura> getProductosFacturas() {
+		return productosFacturas;
+	}
+
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public void setCantidadLatas(int cantidadLatas) {
+		this.cantidadLatas = cantidadLatas;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public void setFechaElab(String fechaElab) {
+		this.fechaElab = fechaElab;
+	}
+
+	public void setFechaVenc(String fechaVenc) {
+		this.fechaVenc = fechaVenc;
+	}
+
+	public void setPeso(double peso) {
+		this.peso = peso;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
 	public void setPescado(Pescado pescado) {
 		this.pescado = pescado;
 	}
+
+	public void setProductosFacturas(List<ProductoFactura> productosFacturas) {
+		this.productosFacturas = productosFacturas;
+	}
+
+
 
 }

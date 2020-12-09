@@ -10,11 +10,11 @@ function hideShowContent() {
     SelectEntero.style.display = "none";
 
     document.getElementById("inputEmpleadoLimpio").style.display = "block";
-    document.getElementById("inputEmpleadoLimpio").required = true;
-    document.getElementById("inputEmpleadoLimpio").setAttribute("name", "numEmpleados");
     document.getElementById("inputEmpleadoEntero").style.display = "none";
+    document.getElementById("inputEmpleadoLimpio").required = true;
     document.getElementById("inputEmpleadoEntero").required = false;
     document.getElementById("inputEmpleadoEntero").value = "";
+    document.getElementById("inputEmpleadoLimpio").setAttribute("name", "numEmpleados");
     document.getElementById("inputEmpleadoEntero").removeAttribute("name");
 
     $("#selectEntero option:selected").prop("selected", false);
@@ -31,12 +31,12 @@ function hideShowContent() {
 
     $("#selectLimpio option:selected").prop("selected", false);
     $("#selectLimpio_val").val("");
-
+	
+	document.getElementById("inputEmpleadoEntero").style.display = "block";
     document.getElementById("inputEmpleadoLimpio").style.display = "none";
     document.getElementById("inputEmpleadoLimpio").required = false;
-    document.getElementById("inputEmpleadoLimpio").value = "";
-    document.getElementById("inputEmpleadoEntero").style.display = "block";
     document.getElementById("inputEmpleadoEntero").required = true;
+    document.getElementById("inputEmpleadoLimpio").value = "";
     document.getElementById("inputEmpleadoEntero").setAttribute("name", "numEmpleados");
     document.getElementById("inputEmpleadoLimpio").removeAttribute("name");
     

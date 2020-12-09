@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -102,23 +103,32 @@ public class Controller {
 				Double.parseDouble(precioKilo), proveedor, pescado, empleado, limpieza);
 
 		this.serviceCargamento.crearCargamento(objCargamento);
-		
+
 		return "redirect:/cargamento";
 	}
 
 	@RequestMapping(value = "cargamento/listaCargamentos", method = RequestMethod.GET)
 	public String listaCargamento(Model model) {
 
-		List<Cargamento> cargamentos =  this.serviceCargamento.listaCargamentos();
+		List<Cargamento> cargamentos = this.serviceCargamento.listaCargamentos();
 		model.addAttribute("cargamentos", cargamentos);
-		
-		return "/consultas/listadoCargamentos"; 
+
+		return "/consultas/listadoCargamentos";
 	}
 
 	@RequestMapping(value = "cargamento/buscarCargamento", method = RequestMethod.GET)
 	public Cargamento buscarCargamento(@RequestParam(name = "idCargamento") int idCargamento) {
 
 		return this.serviceCargamento.buscarCargamento(idCargamento);
+	}
+	
+	@GetMapping("/cargamento/detalle/{idCargamento}")
+	public String detalleCargamento(@PathVariable("idCargamento") int idCargamento, Model model) {
+
+		Cargamento cargamento = this.serviceCargamento.buscarCargamento(idCargamento);
+		model.addAttribute("cargamento", cargamento);
+
+		return "consultas/detalleCargamento";
 	}
 
 // ===================================================================================================================================
@@ -157,6 +167,15 @@ public class Controller {
 	public Empleado buscarEmpleado(@RequestParam(name = "idEmpleado") int idEmpleado) {
 
 		return this.serviceEmpleado.buscarEmpleado(idEmpleado);
+	}
+	
+	@GetMapping("/empleado/detalle/{idEmpleado}")
+	public String detalleEmpleado(@PathVariable("idEmpleado") int idEmpleado, Model model) {
+
+		Empleado empleado = this.serviceEmpleado.buscarEmpleado(idEmpleado);
+		model.addAttribute("empleado", empleado);
+
+		return "consultas/detalleEmpleado";
 	}
 
 // ===================================================================================================================================
@@ -220,7 +239,7 @@ public class Controller {
 				empleadosLimpieza.add(empleados.get(i));
 			}
 		}
-		
+
 		model.addAttribute("supervisores", empleados);
 		model.addAttribute("empleados", empleadosLimpieza);
 		model.addAttribute("cargamentos", cargamentos);
@@ -232,34 +251,49 @@ public class Controller {
 	public String crearLimpieza(@RequestParam(name = "idLimpieza") int idLimpieza,
 			@RequestParam(name = "horaFinal") String horaFinal, @RequestParam(name = "horaInicial") String horaInicial,
 			@RequestParam(name = "idSupervisor") int idSupervisor,
-			@RequestParam(name = "numEmpleados") int numEmpleados, @RequestParam(name = "idCargamentos") String idCargamentos) {
+			@RequestParam(name = "numEmpleados") int numEmpleados,
+			@RequestParam(name = "idCargamentos") String idCargamentos) {
 
-		String [] tmp = idCargamentos.split(",");
+		String[] tmp = idCargamentos.split(",");
 		Empleado supervisor = this.serviceEmpleado.buscarEmpleado(idSupervisor);
 		Limpieza limpieza = new Limpieza(idLimpieza, horaFinal, horaInicial, numEmpleados, supervisor);
-		
+
 		this.serviceLimpieza.crearLimpieza(limpieza);
-		
-		for(int i=0; i<= tmp.length-1; i++){
-		    
+
+		for (int i = 0; i <= tmp.length - 1; i++) {
+
 			Cargamento cargamento = this.serviceCargamento.buscarCargamento(Integer.parseInt(tmp[i]));
 			cargamento.setLimpieza(limpieza);
 			this.serviceCargamento.crearCargamento(cargamento);
 		}
-		
+
 		return "redirect:/limpieza";
 	}
 
 	@RequestMapping(value = "/limpieza/listaLimpiezas", method = RequestMethod.GET)
-	public List<Limpieza> listaLimpiezas() {
+	public String listaLimpiezas(Model model) {
 
-		return this.serviceLimpieza.listaLimpiezas();
+		List<Limpieza> limpiezas = this.serviceLimpieza.listaLimpiezas();
+		List<Cargamento> cargamentos = this.serviceCargamento.listaCargamentos();
+		model.addAttribute("limpiezas", limpiezas);
+		model.addAttribute("cargamentos", cargamentos);
+
+		return "/consultas/listadoLimpiezas";
 	}
 
 	@RequestMapping(value = "/limpieza/buscarLimpieza", method = RequestMethod.GET)
 	public Limpieza buscarLimpieza(@RequestParam(name = "idLimpieza") int idLimpieza) {
 
 		return this.serviceLimpieza.buscarLimpieza(idLimpieza);
+	}
+	
+	@GetMapping("/limpieza/detalle/{idLimpieza}")
+	public String detalleLimpieza(@PathVariable("idLimpieza") int idLimpieza, Model model) {
+
+		Limpieza limpieza = this.serviceLimpieza.buscarLimpieza(idLimpieza);
+		model.addAttribute("limpieza", limpieza);
+
+		return "consultas/detalleLimpieza";
 	}
 
 // ===================================================================================================================================
@@ -286,9 +320,9 @@ public class Controller {
 	@RequestMapping(value = "/pescado/listaPescados", method = RequestMethod.GET)
 	public String listaPescados(Model model) {
 
-		List<Pescado> pescados =  this.servicePescado.listaPescados();
+		List<Pescado> pescados = this.servicePescado.listaPescados();
 		model.addAttribute("pescados", pescados);
-		
+
 		return "/consultas/listadoPescados";
 	}
 
@@ -297,6 +331,16 @@ public class Controller {
 
 		return this.servicePescado.buscarPescado(idPescado);
 	}
+	
+	@GetMapping("/pescado/detalle/{idPescado}")
+	public String detallePescado(@PathVariable("idPescado") int idPescado, Model model) {
+
+		Pescado pescado = this.servicePescado.buscarPescado(idPescado);
+		model.addAttribute("pescado", pescado);
+
+		return "consultas/detallePescado";
+	}
+
 
 // ===================================================================================================================================
 // Producto
@@ -318,9 +362,13 @@ public class Controller {
 			@RequestParam(value = "fechaElab") String fechaElab, @RequestParam(value = "fechaVenc") String fechaVenc,
 			@RequestParam(value = "peso") double peso, @RequestParam(value = "precio") double precio,
 			@RequestParam(value = "idPescado") int idPescado) {
-
+		
+		System.out.println(idProducto);
+		
 		Pescado pescado = this.servicePescado.buscarPescado(idPescado);
-		Producto producto = new Producto(idProducto, cantidadLatas, descripcion, fechaElab, fechaVenc, peso, precio, pescado);
+		
+		Producto producto = new Producto(idProducto, cantidadLatas, descripcion, fechaElab, fechaVenc, peso, precio,
+				pescado);
 
 		this.serviceProducto.crearProducto(producto);
 		return "redirect:/producto";
@@ -331,7 +379,7 @@ public class Controller {
 
 		List<Producto> productos = this.serviceProducto.listaProductos();
 		model.addAttribute("productos", productos);
-		
+
 		return "/consultas/listadoProductos";
 	}
 
@@ -339,6 +387,16 @@ public class Controller {
 	public Producto buscarProducto(@RequestParam(value = "idProducto") int idProducto) {
 
 		return this.serviceProducto.buscarProducto(idProducto);
+	}
+	
+	
+	@GetMapping("/producto/detalle/{idProducto}")
+	public String detalleProducto(@PathVariable("idProducto") int idProducto, Model model) {
+
+		Producto producto = this.serviceProducto.buscarProducto(idProducto);
+		model.addAttribute("producto", producto);
+
+		return "consultas/detalleProducto";
 	}
 
 // ===================================================================================================================================
@@ -408,6 +466,15 @@ public class Controller {
 	public Proveedor buscarProveedor(@RequestParam(name = "idProveedor") int idProveedor) {
 
 		return this.serviceProveedor.buscarProveedor(idProveedor);
+	}
+	
+	@GetMapping("/proveedor/detalle/{idProveedor}")
+	public String detalleProveedor(@PathVariable("idProveedor") int idProveedor, Model model) {
+
+		Proveedor proveedor = this.serviceProveedor.buscarProveedor(idProveedor);
+		model.addAttribute("proveedor", proveedor);
+
+		return "consultas/detalleProveedor";
 	}
 
 }

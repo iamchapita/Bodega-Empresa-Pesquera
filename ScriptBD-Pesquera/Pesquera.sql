@@ -64,7 +64,7 @@ CREATE TABLE Producto (
     idProducto INT PRIMARY KEY,
     idPescado INT,
     cantidadLatas INT,
-    descripcion VARCHAR(50),
+    descripcion VARCHAR(100),
     fechaElab VARCHAR(50),
     fechaVenc VARCHAR(50),
     peso DOUBLE,
@@ -92,6 +92,7 @@ CREATE TABLE Proveedor (
 
 
 use Pesquera;
+
 insert into Empleado values(0,"N/A","N/A","N/A","N/A","N/A","N/A");
 insert into Limpieza values(0,0,"N/A","N/A",0);
 
