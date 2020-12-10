@@ -51,56 +51,22 @@
 			style="margin-top: 2%; margin-bottom: 2%; font-family: sans-serif; text-align: center;">
 			<div class="card" id="shadow">
 				<div class="card-body" style="margin-bottom: 1%">
-
-					<h2
-						style="text-align: center; font-weight: bold; font-family: sans-serif; margin-bottom: 1%;">
-						Detalle de Cargamentos</h2>
-					<h4
-						style="text-align: center; font-weight: bold; font-family: sans-serif; margin-bottom: 1%;">
-						Cargamentos Registrados en la Base de Datos</h4>
-
+					<h1
+						style="text-align: center; font-weight: bold; margin-bottom: 1%; margin-top: 1%;">
+						Registro de Productos en Factura</h1>
 
 					<hr style="color: #3b5c94; border: 1px solid" />
 
-						<form>
-							<div class="form-group">
-								<label for="colFormLableSm">Id Cargamento: </label>
-								<label for="colFormLableSm" th:text="${cargamento.idCargamento}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Supervisor: </label>
-								<label for="colFormLableSm" th:text="${' Id: '+cargamento.empleado.idEmpleado +'   Nombre: '+cargamento.empleado.nombre}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Pescado: </label>
-								<label for="colFormLableSm" th:text="${' Id: '+cargamento.pescado.idPescado +'   Nombre: '+ cargamento.pescado.nombre}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Proveedor: </label>
-								<label for="colFormLableSm" th:text="${' Id: '+cargamento.proveedor.idProveedor + '   Nombre: ' +cargamento.proveedor.nombre}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Limpieza: </label>
-								<label for="colFormLableSm" th:text="${cargamento.limpieza.idLimpieza}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Calidad: </label>
-								<label for="colFormLableSm" th:text="${cargamento.calidad}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Estado: </label>
-								<label for="colFormLableSm" th:text="${cargamento.estado}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Peso Global: </label>
-								<label for="colFormLableSm" th:text="${cargamento.pesoGlobal +' Kg.'}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Precio por Kilo: </label>
-								<label for="colFormLableSm" th:text="${'L. '+cargamento.precioKilo}"></label>
-							</div>
-						</form>
+					<div class="container">
 
+						<div class="alert alert-success" role="alert" style="background-color: #3b5c94; color:white;">
+							<h4 class="alert-heading">¡Algo ha salido mal!</h4>
+							<p>La cantidad de Latas que se ingresó para el producto, no está disponible en el inventario.
+							</p>
+							<hr>
+							<p class="mb-0">Por favor, revisa la cantidad de Latas y vuelve a intentarlo.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

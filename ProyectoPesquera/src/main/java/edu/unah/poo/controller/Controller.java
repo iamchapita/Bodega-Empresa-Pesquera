@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.sun.xml.bind.marshaller.DumbEscapeHandler;
 
 import edu.unah.poo.model.Cargamento;
 import edu.unah.poo.model.Empleado;
@@ -121,7 +120,7 @@ public class Controller {
 
 		return this.serviceCargamento.buscarCargamento(idCargamento);
 	}
-	
+
 	@GetMapping("/cargamento/detalle/{idCargamento}")
 	public String detalleCargamento(@PathVariable("idCargamento") int idCargamento, Model model) {
 
@@ -168,7 +167,7 @@ public class Controller {
 
 		return this.serviceEmpleado.buscarEmpleado(idEmpleado);
 	}
-	
+
 	@GetMapping("/empleado/detalle/{idEmpleado}")
 	public String detalleEmpleado(@PathVariable("idEmpleado") int idEmpleado, Model model) {
 
@@ -182,17 +181,26 @@ public class Controller {
 // Factura
 // ===================================================================================================================================
 
-	@RequestMapping(value = "/factura/crearFactura", method = RequestMethod.GET)
-	public Factura crearFactura(@RequestParam(name = "idFactura") int idFactura,
+	@GetMapping(value = "/factura")
+	public String factura(Model model) {
+
+		List<Empleado> empleados = this.serviceEmpleado.listaEmpleados();
+		model.addAttribute("empleados", empleados);
+
+		return "factura";
+	}
+
+	@RequestMapping(value = "/factura/crearFactura", method = RequestMethod.POST)
+	public String crearFactura(@RequestParam(name = "idFactura") int idFactura,
 			@RequestParam(value = "fecha") String fecha, @RequestParam(value = "lugarVenta") String lugarVenta,
-			@RequestParam(value = "total") double total, @RequestParam(value = "idVendedor") int idVendedor) {
+			@RequestParam(value = "idVendedor") int idVendedor) {
 
 		Empleado vendedor = this.serviceEmpleado.buscarEmpleado(idVendedor);
-		double isv = total * 0.15;
 
-		Factura factura = new Factura(idFactura, fecha, isv, lugarVenta, total, vendedor);
+		Factura factura = new Factura(idFactura, fecha, 0.0, lugarVenta, 0.0, vendedor);
 
-		return this.serviceFactura.crearFactura(factura);
+		this.serviceFactura.crearFactura(factura);
+		return "redirect:/factura";
 	}
 
 	@RequestMapping(value = "/factura/listaFacturas", method = RequestMethod.GET)
@@ -205,22 +213,6 @@ public class Controller {
 	public Factura buscarFactura(@RequestParam(name = "idFactura") int idFactura) {
 
 		return this.serviceFactura.buscarFactura(idFactura);
-	}
-
-	@SuppressWarnings("unused")
-	private double obtenerTotal(int idFactura) {
-
-		List<Producto> productos = this.serviceProducto.listaProductos();
-		double total = 0.0;
-
-		for (int i = 1; i < productos.size(); i++) {
-
-			int idProducto = productos.get(i).getIdProducto();
-			ProductoFactura productoFactura = this.buscarProductoFactura(idProducto, idFactura);
-			total = total + productoFactura.getPrecio();
-		}
-
-		return total;
 	}
 
 // ===================================================================================================================================
@@ -286,7 +278,7 @@ public class Controller {
 
 		return this.serviceLimpieza.buscarLimpieza(idLimpieza);
 	}
-	
+
 	@GetMapping("/limpieza/detalle/{idLimpieza}")
 	public String detalleLimpieza(@PathVariable("idLimpieza") int idLimpieza, Model model) {
 
@@ -331,7 +323,7 @@ public class Controller {
 
 		return this.servicePescado.buscarPescado(idPescado);
 	}
-	
+
 	@GetMapping("/pescado/detalle/{idPescado}")
 	public String detallePescado(@PathVariable("idPescado") int idPescado, Model model) {
 
@@ -340,7 +332,6 @@ public class Controller {
 
 		return "consultas/detallePescado";
 	}
-
 
 // ===================================================================================================================================
 // Producto
@@ -362,11 +353,9 @@ public class Controller {
 			@RequestParam(value = "fechaElab") String fechaElab, @RequestParam(value = "fechaVenc") String fechaVenc,
 			@RequestParam(value = "peso") double peso, @RequestParam(value = "precio") double precio,
 			@RequestParam(value = "idPescado") int idPescado) {
-		
-		System.out.println(idProducto);
-		
+
 		Pescado pescado = this.servicePescado.buscarPescado(idPescado);
-		
+
 		Producto producto = new Producto(idProducto, cantidadLatas, descripcion, fechaElab, fechaVenc, peso, precio,
 				pescado);
 
@@ -388,8 +377,7 @@ public class Controller {
 
 		return this.serviceProducto.buscarProducto(idProducto);
 	}
-	
-	
+
 	@GetMapping("/producto/detalle/{idProducto}")
 	public String detalleProducto(@PathVariable("idProducto") int idProducto, Model model) {
 
@@ -403,20 +391,65 @@ public class Controller {
 // ProductoFactura
 // ===================================================================================================================================
 
-	@RequestMapping(value = "/productoFactura/crearProductoFactura", method = RequestMethod.GET)
-	public ProductoFactura crearProductoFactura(@RequestParam(value = "idProducto") int idProducto,
+	@GetMapping(value = "/agregarProducto")
+	public String productoFactura(Model model) {
+
+		List<Producto> productos = this.serviceProducto.listaProductos();
+		List<Factura> facturas = this.serviceFactura.listaFacturas();
+		model.addAttribute("productos", productos);
+		model.addAttribute("facturas", facturas);
+
+		return "agregarProducto";
+	}
+
+	@RequestMapping(value = "/productoFactura/crearProductoFactura", method = RequestMethod.POST)
+	public String crearProductoFactura(@RequestParam(value = "idProducto") int idProducto,
 			@RequestParam(value = "idFactura") int idFactura, @RequestParam(value = "cantidad") int cantidad) {
 
-		IdProductoFactura id = new IdProductoFactura(idProducto, idFactura);
-		Factura factura = this.serviceFactura.buscarFactura(idFactura);
 		Producto producto = this.serviceProducto.buscarProducto(idProducto);
 
-		double precio = this.serviceProducto.buscarProducto(idProducto).getPrecio();
+		if (cantidad > producto.getCantidadLatas()) {
+
+			return "errorCantidadLatas";
+
+		}
+		/*
+		 * if(cantidad == 0){ ProductoFactura productoFactura =
+		 * this.ServiceProductoFactura.buscarProductoFactura(id); if( productoFactura !=
+		 * null) {
+		 * producto.setCantidadLatas(producto.getCantidadLatas()+productoFactura.
+		 * getCantidad()); double precioProdFactura = productoFactura.getPrecio();
+		 * double isvProdFactura = productoFactura.getPrecio()*0.15; double total =
+		 * factura.getTotal() - precioProdFactura; double isv = factura.getIsv() -
+		 * isvProdFactura; factura.setTotal(total); factura.setIsv(isv);
+		 * this.serviceFactura.crearFactura(factura); }else { return
+		 * "redirect:/errorProductoFactura"; } }
+		 */
+
+		Factura factura = this.serviceFactura.buscarFactura(idFactura);
+		IdProductoFactura id = new IdProductoFactura(idProducto, idFactura);
+		
+		double precio = producto.getPrecio();
 		precio = precio * cantidad;
 
-		ProductoFactura productoFactura = new ProductoFactura(id, cantidad, precio, factura, producto);
+		double total = factura.getTotal();
+		double isv = factura.getIsv();
 
-		return this.ServiceProductoFactura.crearProductoFactura(productoFactura);
+		total = total + precio;
+		isv = precio * 0.15 + isv;
+
+		factura.setTotal(total);
+		factura.setIsv(isv);
+
+		producto.setCantidadLatas(producto.getCantidadLatas() - cantidad);
+
+		this.serviceProducto.crearProducto(producto);
+		this.serviceFactura.crearFactura(factura);
+
+		ProductoFactura productoFactura = new ProductoFactura(id, cantidad, precio, factura, producto);
+		this.ServiceProductoFactura.crearProductoFactura(productoFactura);
+
+		return "redirect:/agregarProducto";
 	}
 
 	@RequestMapping(value = "/productoFactura/listaProductoFactura", method = RequestMethod.GET)
@@ -467,7 +500,7 @@ public class Controller {
 
 		return this.serviceProveedor.buscarProveedor(idProveedor);
 	}
-	
+
 	@GetMapping("/proveedor/detalle/{idProveedor}")
 	public String detalleProveedor(@PathVariable("idProveedor") int idProveedor, Model model) {
 

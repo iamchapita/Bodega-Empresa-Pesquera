@@ -27,5 +27,5 @@ public class ServiceProductoFactura {
 	public List<ProductoFactura> obtenerProductoFactura() {
 		return this.repositoryProductoFactura.findAll();
 	}
-	
+		
 }

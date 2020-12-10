@@ -104,8 +104,10 @@ SELECT * FROM Producto;
 SELECT * FROM Factura;
 SELECT * FROM ProductoFactura;
 SELECT * FROM Pescado;
+SELECT * FROM Factura;
 
-DELETE FROM Cargamento where idCargamento=8;
+DELETE FROM Factura;
+DELETE FROM ProductoFactura;
 DELETE FROM Limpieza;
 DELETE FROM Empleado;
-DELETE FROM Proveedor where idProveedor=7;
+

@@ -53,140 +53,77 @@
 				<div class="card-body" style="margin-bottom: 1%">
 					<h1
 						style="text-align: center; font-weight: bold; margin-bottom: 1%; margin-top: 1%;">
-						Registro de Producto</h1>
+						Registro de Productos en Factura</h1>
 
 					<hr style="color: #3b5c94; border: 1px solid" />
 
 					<div class="container">
 						<div class="col-sm-12 mx-auto text-center form p-4">
 							<div class="px-2">
-								<form th:action="@{/producto/crearProducto}" method="post">
+								<form th:action="@{/productoFactura/crearProductoFactura}"
+									method="post">
 
 									<div class="form-row">
-										<div class="form-group col-sm">
-
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text" id="inputGroupPrepend">Id
-														Producto</span>
-												</div>
-												<input type="number" class="form-control" name="idProducto"
-													placeholder="1~4294967295" min="1" max="4294967295"
-													aria-describedby="inputGroupPrepend" required />
-												<div class="invalid-feedback">Ingrese un número entero</div>
-											</div>
-										</div>
 
 										<div class="form-group col-sm">
 
 											<div class="input-group">
 												<div class="input-group-prepend">
-
-													<span class="input-group-text" id="inputGroupPrepend">Pescado</span>
+													<span class="input-group-text" id="inputGroupPrepend">Factura</span>
 												</div>
 
 												<select class="custom-select" id="inputGroupSelect01"
-													required="required" name="idPescado">
-													<option value="">Seleccione un Pescado</option>
-													<option th:each="pescado, fila : ${pescados}"
-														th:value="${pescado.idPescado}"
-														th:text="${pescado.idPescado+', '+pescado.nombre}" />
+													required="required" name="idFactura">
+													<option value="">Seleccione una Factura</option>
+													<option th:each="factura : ${facturas}"
+														th:value="${factura.idFactura}"
+														th:text="${'Factura: '+factura.idFactura+', Vendedor: '+factura.vendedor.nombre}" />
 												</select>
 
 											</div>
 										</div>
 
 										<div class="form-group col-sm">
+
 											<div class="input-group">
 												<div class="input-group-prepend">
 
-													<span class="input-group-text" id="inputGroupPrepend">Peso(kg)</span>
+													<span class="input-group-text" id="inputGroupPrepend">Producto</span>
 												</div>
 
-												<input type="number" class="form-control" name="peso"
-													placeholder="1,2,3,4,5" required pattern="(\d+\.?\d*)"
-													aria-describedby="inputGroupPrepend" />
+												<select class="custom-select" id="inputGroupSelect01"
+													required="required" name="idProducto">
+													<option value="">Seleccione un Producto</option>
+													<option th:each="producto : ${productos}"
+														th:value="${producto.idProducto}"
+														th:text="${'Id: '+producto.idProducto+', '+'Pescado: '+producto.pescado.nombre+', '+'Precio: L. '+producto.precio+', '+'Cantidad Latas: '+producto.cantidadLatas}" />
+												</select>
 
-												<div class="invalid-feedback">Ingrese una número
-													entero</div>
 											</div>
 										</div>
+
 									</div>
 
-									<div class="form-row">
-										<div class="form-group col-sm">
-											<div class="input-group">
-												<div class="input-group-prepend">
 
-													<span class="input-group-text" id="inputGroupPrepend">Elaboración</span>
-												</div>
-
-												<input type="date" class="form-control" name="fechaElab"
-													aria-describedby="inputGroupPrepend" required />
-												<div class="invalid-feedback">Ingrese una Fecha</div>
-
-											</div>
-										</div>
-										<div class="form-group col-sm">
-											<div class="input-group">
-												<div class="input-group-prepend">
-
-													<span class="input-group-text" id="inputGroupPrepend">Vencimiento</span>
-												</div>
-												<input type="date" class="form-control" name="fechaVenc"
-													aria-describedby="inputGroupPrepend" required />
-												<div class="invalid-feedback">Ingrese una Fecha</div>
-
-											</div>
-										</div>
-									</div>
 
 									<div class="form-row">
+
 										<div class="form-group col-sm">
+
 											<div class="input-group">
 												<div class="input-group-prepend">
-
 													<span class="input-group-text" id="inputGroupPrepend">Cantidad
-														Latas</span>
+														de Latas</span>
 												</div>
-												<input type="number" class="form-control"
-													name="cantidadLatas" aria-describedby="inputGroupPrepend"
-													required placeholder="1~4294967295" min="1"
-													max="4294967295">
+												<input type="number" class="form-control" name="cantidad"
+													placeholder="Ingrese la cantidad de Latas" min="0"
+													max="4294967295" aria-describedby="inputGroupPrepend"
+													required />
 												<div class="invalid-feedback">Ingrese un número entero</div>
-
 											</div>
 										</div>
 
-										<div class="form-group col-sm">
-											<div class="input-group">
-												<div class="input-group-prepend">
-
-													<label class="input-group-text" for="inputGroupSelect01">Precio</label>
-												</div>
-
-												<input type="text" class="form-control" name="precio"
-													aria-describedby="inputGroupPrepend" required
-													placeholder="99.99" pattern="(\d+\.?\d*)" />
-												<div class="invalid-feedback">Ingrese un precio válido</div>
-
-											</div>
-										</div>
 									</div>
-									<div class="form-row">
-
-										<div class="form-group col-sm">
-
-											<label>Descripción</label>
-
-											<textarea class="form-control" name="descripcion"
-												id="exampleFormControlTextarea1" maxlength="100"
-												required="required" placeholder="Ingrese una descripción del Producto"></textarea>
-
-										</div>
-
-									</div>
-
 									<button type="submit" class="button submit" name="guardar"
 										style="margin-top: 3%">Guardar</button>
 								</form>

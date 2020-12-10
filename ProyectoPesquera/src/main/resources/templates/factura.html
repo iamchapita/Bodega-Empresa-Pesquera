@@ -53,14 +53,14 @@
 				<div class="card-body" style="margin-bottom: 1%">
 					<h1
 						style="text-align: center; font-weight: bold; margin-bottom: 1%; margin-top: 1%;">
-						Registro de Producto</h1>
+						Registro de Factura</h1>
 
 					<hr style="color: #3b5c94; border: 1px solid" />
 
 					<div class="container">
 						<div class="col-sm-12 mx-auto text-center form p-4">
 							<div class="px-2">
-								<form th:action="@{/producto/crearProducto}" method="post">
+								<form th:action="@{/factura/crearFactura}" method="post">
 
 									<div class="form-row">
 										<div class="form-group col-sm">
@@ -68,9 +68,9 @@
 											<div class="input-group">
 												<div class="input-group-prepend">
 													<span class="input-group-text" id="inputGroupPrepend">Id
-														Producto</span>
+														Factura</span>
 												</div>
-												<input type="number" class="form-control" name="idProducto"
+												<input type="number" class="form-control" name="idFactura"
 													placeholder="1~4294967295" min="1" max="4294967295"
 													aria-describedby="inputGroupPrepend" required />
 												<div class="invalid-feedback">Ingrese un número entero</div>
@@ -82,36 +82,24 @@
 											<div class="input-group">
 												<div class="input-group-prepend">
 
-													<span class="input-group-text" id="inputGroupPrepend">Pescado</span>
+													<span class="input-group-text" id="inputGroupPrepend">Vendedor</span>
 												</div>
 
 												<select class="custom-select" id="inputGroupSelect01"
-													required="required" name="idPescado">
-													<option value="">Seleccione un Pescado</option>
-													<option th:each="pescado, fila : ${pescados}"
-														th:value="${pescado.idPescado}"
-														th:text="${pescado.idPescado+', '+pescado.nombre}" />
+													required="required" name="idVendedor">
+													<option value="">Seleccione un Vendedor</option>
+													<option th:each="empleado : ${empleados}"
+														th:if="${empleado.puesto == 'Vendedor'}"
+														th:value="${empleado.idEmpleado}"
+														th:text="${empleado.idEmpleado+', '+empleado.nombre}" />
 												</select>
 
 											</div>
 										</div>
 
-										<div class="form-group col-sm">
-											<div class="input-group">
-												<div class="input-group-prepend">
-
-													<span class="input-group-text" id="inputGroupPrepend">Peso(kg)</span>
-												</div>
-
-												<input type="number" class="form-control" name="peso"
-													placeholder="1,2,3,4,5" required pattern="(\d+\.?\d*)"
-													aria-describedby="inputGroupPrepend" />
-
-												<div class="invalid-feedback">Ingrese una número
-													entero</div>
-											</div>
-										</div>
 									</div>
+									
+
 
 									<div class="form-row">
 										<div class="form-group col-sm">
@@ -121,71 +109,32 @@
 													<span class="input-group-text" id="inputGroupPrepend">Elaboración</span>
 												</div>
 
-												<input type="date" class="form-control" name="fechaElab"
+												<input type="date" class="form-control" name="fecha"
 													aria-describedby="inputGroupPrepend" required />
 												<div class="invalid-feedback">Ingrese una Fecha</div>
 
 											</div>
 										</div>
-										<div class="form-group col-sm">
-											<div class="input-group">
-												<div class="input-group-prepend">
 
-													<span class="input-group-text" id="inputGroupPrepend">Vencimiento</span>
-												</div>
-												<input type="date" class="form-control" name="fechaVenc"
-													aria-describedby="inputGroupPrepend" required />
-												<div class="invalid-feedback">Ingrese una Fecha</div>
-
-											</div>
-										</div>
 									</div>
-
-									<div class="form-row">
-										<div class="form-group col-sm">
-											<div class="input-group">
-												<div class="input-group-prepend">
-
-													<span class="input-group-text" id="inputGroupPrepend">Cantidad
-														Latas</span>
-												</div>
-												<input type="number" class="form-control"
-													name="cantidadLatas" aria-describedby="inputGroupPrepend"
-													required placeholder="1~4294967295" min="1"
-													max="4294967295">
-												<div class="invalid-feedback">Ingrese un número entero</div>
-
-											</div>
-										</div>
-
-										<div class="form-group col-sm">
-											<div class="input-group">
-												<div class="input-group-prepend">
-
-													<label class="input-group-text" for="inputGroupSelect01">Precio</label>
-												</div>
-
-												<input type="text" class="form-control" name="precio"
-													aria-describedby="inputGroupPrepend" required
-													placeholder="99.99" pattern="(\d+\.?\d*)" />
-												<div class="invalid-feedback">Ingrese un precio válido</div>
-
-											</div>
-										</div>
-									</div>
+									
 									<div class="form-row">
 
 										<div class="form-group col-sm">
 
 											<label>Descripción</label>
 
-											<textarea class="form-control" name="descripcion"
-												id="exampleFormControlTextarea1" maxlength="100"
-												required="required" placeholder="Ingrese una descripción del Producto"></textarea>
+											<textarea class="form-control" name="lugarVenta"
+												id="exampleFormControlTextarea1" maxlength="50"
+												required="required"
+												placeholder="Ingrese el lugar de Venta"></textarea>
 
 										</div>
 
 									</div>
+
+									
+									
 
 									<button type="submit" class="button submit" name="guardar"
 										style="margin-top: 3%">Guardar</button>
