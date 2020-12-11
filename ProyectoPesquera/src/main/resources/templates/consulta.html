@@ -41,7 +41,7 @@
 				</a></li>
 
 				<li class="nav-item"><a class="nav-link"
-					style="font-family: sans-serif">Acerca De</a></li>
+					th:href="@{/acercaDe}" style="font-family: sans-serif">Acerca De</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -134,9 +134,8 @@
 						<img class="card-img-top" th:src="@{/images/factura.jpg}"
 							style="max-width: 100%; width: auto; height: auto" />
 						<div class="card-body">
-							<a th:href="@{/factura}"><h5 class="card-title">Factura</h5></a>
-							<p class="card-text">Añada una Factura para posteriormente
-								agregarle productos.</p>
+							<a th:href="@{/factura/listaFacturas}"><h5 class="card-title">Factura</h5></a>
+							<p class="card-text">Consulte las Facturas ingresadas en el sistema.</p>
 						</div>
 					</div>
 						<div class="card" style="border-color: white;">

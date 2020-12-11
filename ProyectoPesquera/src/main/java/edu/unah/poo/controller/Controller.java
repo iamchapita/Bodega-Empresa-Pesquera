@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,6 +68,11 @@ public class Controller {
 	public String consulta() {
 		return "consulta";
 	}
+	
+	@GetMapping("/acercaDe")
+	public String acercaDe() {
+		return "acercaDe";
+	}
 
 // ===================================================================================================================================
 // Cargamento
@@ -92,6 +96,11 @@ public class Controller {
 			@RequestParam(name = "pesoGlobal") String pesoGlobal, @RequestParam(name = "precioKilo") String precioKilo,
 			@RequestParam(name = "idProveedor") String idProveedor, @RequestParam(name = "idPescado") String idPescado,
 			@RequestParam(name = "idEmpleado") String idEmpleado) {
+
+		if (this.serviceCargamento.buscarCargamento(idCargamento) != null) {
+
+			return "/avisos/avisoSobreescritura";
+		}
 
 		Proveedor proveedor = serviceProveedor.buscarProveedor(Integer.parseInt(idProveedor));
 		Pescado pescado = servicePescado.buscarPescado(Integer.parseInt(idPescado));
@@ -146,6 +155,10 @@ public class Controller {
 			@RequestParam(name = "nombre") String nombre, @RequestParam(name = "puesto") String puesto,
 			@RequestParam(name = "telefono") String telefono) {
 
+		if (this.serviceEmpleado.buscarEmpleado(idEmpleado) != null) {
+			return "/avisos/avisoSobreescritura";
+		}
+
 		Empleado empleado = new Empleado(idEmpleado, direccion, fechaContrato, fechaNacimiento, nombre, puesto,
 				telefono);
 
@@ -195,6 +208,10 @@ public class Controller {
 			@RequestParam(value = "fecha") String fecha, @RequestParam(value = "lugarVenta") String lugarVenta,
 			@RequestParam(value = "idVendedor") int idVendedor) {
 
+		if (this.serviceFactura.buscarFactura(idFactura) != null) {
+			return "/avisos/avisoSobreescritura";
+		}
+		
 		Empleado vendedor = this.serviceEmpleado.buscarEmpleado(idVendedor);
 
 		Factura factura = new Factura(idFactura, fecha, 0.0, lugarVenta, 0.0, vendedor);
@@ -204,15 +221,65 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/factura/listaFacturas", method = RequestMethod.GET)
-	public List<Factura> listaFacturas() {
+	public String listaFacturas(Model model) {
 
-		return this.serviceFactura.listaFacturas();
+		List<Factura> facturas = this.serviceFactura.listaFacturas();
+		model.addAttribute("facturas", facturas);
+
+		return "consultas/listadoFacturas";
 	}
 
 	@RequestMapping(value = "/factura/buscarFactura", method = RequestMethod.GET)
 	public Factura buscarFactura(@RequestParam(name = "idFactura") int idFactura) {
 
 		return this.serviceFactura.buscarFactura(idFactura);
+	}
+
+	@GetMapping("/factura/detalle/{idFactura}")
+	public String detalleFactura(@PathVariable("idFactura") int idFactura, Model model) {
+
+		List<ProductoFactura> productosEnFactura = this.ServiceProductoFactura.obtenerProductoFactura();
+
+		Factura factura = this.serviceFactura.buscarFactura(idFactura);
+		model.addAttribute("factura", factura);
+		model.addAttribute("productosEnFactura", productosEnFactura);
+
+		return "consultas/detalleFactura";
+	}
+
+	@GetMapping("/factura/cerrar/{idFactura}")
+	public String cerrarFactura(@PathVariable("idFactura") int idFactura) {
+
+		if (this.serviceFactura.buscarFactura(idFactura).getTotal() > 0) {
+
+			return "avisos/avisoCerrada";
+		}
+
+		List<ProductoFactura> productosEnFactura = this.ServiceProductoFactura.obtenerProductoFactura();
+
+		double total = 0;
+		double isv = 0;
+
+		for (int i = 0; i < productosEnFactura.size(); i++) {
+
+			if (productosEnFactura.get(i).getFactura().getIdFactura() == idFactura) {
+
+				Producto producto = productosEnFactura.get(i).getProducto();
+				total = productosEnFactura.get(i).getPrecio() + total;
+				producto.setCantidadLatas(producto.getCantidadLatas() - productosEnFactura.get(i).getCantidad());
+				this.serviceProducto.crearProducto(producto);
+			}
+		}
+
+		isv = total * 0.15;
+
+		Factura factura = this.serviceFactura.buscarFactura(idFactura);
+		factura.setTotal(total);
+		factura.setIsv(isv);
+
+		this.serviceFactura.crearFactura(factura);
+
+		return "consultas/listadoFacturas";
 	}
 
 // ===================================================================================================================================
@@ -246,6 +313,10 @@ public class Controller {
 			@RequestParam(name = "numEmpleados") int numEmpleados,
 			@RequestParam(name = "idCargamentos") String idCargamentos) {
 
+		if (this.serviceLimpieza.buscarLimpieza(idLimpieza) != null) {
+			return "/avisos/avisoSobreescritura";
+		}
+		
 		String[] tmp = idCargamentos.split(",");
 		Empleado supervisor = this.serviceEmpleado.buscarEmpleado(idSupervisor);
 		Limpieza limpieza = new Limpieza(idLimpieza, horaFinal, horaInicial, numEmpleados, supervisor);
@@ -302,6 +373,10 @@ public class Controller {
 			@RequestParam(name = "color") String color, @RequestParam(name = "nombre") String nombre,
 			@RequestParam(name = "tamanioPromedio") double tamanioPromedio, @RequestParam(name = "tipo") String tipo) {
 
+		if (this.servicePescado.buscarPescado(idPescado) != null) {
+			return "/avisos/avisoSobreescritura";
+		}
+		
 		Pescado pescado = new Pescado(idPescado, color, nombre, tamanioPromedio, tipo);
 
 		this.servicePescado.crearPescado(pescado);
@@ -354,6 +429,10 @@ public class Controller {
 			@RequestParam(value = "peso") double peso, @RequestParam(value = "precio") double precio,
 			@RequestParam(value = "idPescado") int idPescado) {
 
+		if (this.serviceProducto.buscarProducto(idProducto) != null) {
+			return "/avisos/avisoSobreescritura";
+		}
+		
 		Pescado pescado = this.servicePescado.buscarPescado(idPescado);
 
 		Producto producto = new Producto(idProducto, cantidadLatas, descripcion, fechaElab, fechaVenc, peso, precio,
@@ -407,44 +486,21 @@ public class Controller {
 			@RequestParam(value = "idFactura") int idFactura, @RequestParam(value = "cantidad") int cantidad) {
 
 		Producto producto = this.serviceProducto.buscarProducto(idProducto);
+		Factura factura = this.serviceFactura.buscarFactura(idFactura);
+		IdProductoFactura id = new IdProductoFactura(idProducto, idFactura);
 
 		if (cantidad > producto.getCantidadLatas()) {
 
 			return "errorCantidadLatas";
 
 		}
-		/*
-		 * if(cantidad == 0){ ProductoFactura productoFactura =
-		 * this.ServiceProductoFactura.buscarProductoFactura(id); if( productoFactura !=
-		 * null) {
-		 * producto.setCantidadLatas(producto.getCantidadLatas()+productoFactura.
-		 * getCantidad()); double precioProdFactura = productoFactura.getPrecio();
-		 * double isvProdFactura = productoFactura.getPrecio()*0.15; double total =
-		 * factura.getTotal() - precioProdFactura; double isv = factura.getIsv() -
-		 * isvProdFactura; factura.setTotal(total); factura.setIsv(isv);
-		 * this.serviceFactura.crearFactura(factura); }else { return
-		 * "redirect:/errorProductoFactura"; } }
-		 */
 
-		Factura factura = this.serviceFactura.buscarFactura(idFactura);
-		IdProductoFactura id = new IdProductoFactura(idProducto, idFactura);
-		
+		if (factura.getTotal() > 0) {
+			return "avisos/avisoCerrada";
+		}
+
 		double precio = producto.getPrecio();
 		precio = precio * cantidad;
-
-		double total = factura.getTotal();
-		double isv = factura.getIsv();
-
-		total = total + precio;
-		isv = precio * 0.15 + isv;
-
-		factura.setTotal(total);
-		factura.setIsv(isv);
-
-		producto.setCantidadLatas(producto.getCantidadLatas() - cantidad);
-
-		this.serviceProducto.crearProducto(producto);
-		this.serviceFactura.crearFactura(factura);
 
 		ProductoFactura productoFactura = new ProductoFactura(id, cantidad, precio, factura, producto);
 		this.ServiceProductoFactura.crearProductoFactura(productoFactura);
@@ -479,6 +535,10 @@ public class Controller {
 	public String crearProveedor(@RequestParam(name = "idProveedor") int idProveedor,
 			@RequestParam(name = "nombre") String nombre) {
 
+		if (this.serviceProveedor.buscarProveedor(idProveedor) != null) {
+			return "/avisos/avisoSobreescritura";
+		}
+		
 		Proveedor objProveedor = new Proveedor(idProveedor, nombre);
 		this.serviceProveedor.crearProveedor(objProveedor);
 
