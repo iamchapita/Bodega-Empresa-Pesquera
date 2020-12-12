@@ -46,48 +46,48 @@ public class Limpieza {
 		return idLimpieza;
 	}
 
-	public void setIdLimpieza(int idLimpieza) {
-		this.idLimpieza = idLimpieza;
-	}
-
 	public String getHoraFinal() {
 		return horaFinal;
-	}
-
-	public void setHoraFinal(String horaFinal) {
-		this.horaFinal = horaFinal;
 	}
 
 	public String getHoraInicio() {
 		return horaInicio;
 	}
 
-	public void setHoraInicio(String horaInicio) {
-		this.horaInicio = horaInicio;
-	}
-
 	public int getNumEmpleados() {
 		return numEmpleados;
-	}
-
-	public void setNumEmpleados(int numEmpleados) {
-		this.numEmpleados = numEmpleados;
 	}
 
 	public Empleado getSupervisor() {
 		return supervisor;
 	}
 
-	public void setSupervisor(Empleado supervisor) {
-		this.supervisor = supervisor;
-	}
-
 	public List<Cargamento> getCargamentos() {
 		return cargamentos;
+	}
+
+	public void setIdLimpieza(int idLimpieza) {
+		this.idLimpieza = idLimpieza;
+	}
+
+	public void setHoraFinal(String horaFinal) {
+		this.horaFinal = horaFinal;
+	}
+
+	public void setHoraInicio(String horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public void setNumEmpleados(int numEmpleados) {
+		this.numEmpleados = numEmpleados;
+	}
+
+	public void setSupervisor(Empleado supervisor) {
+		this.supervisor = supervisor;
 	}
 
 	public void setCargamentos(List<Cargamento> cargamentos) {
 		this.cargamentos = cargamentos;
 	}
 
-}
+	}
