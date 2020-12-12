@@ -44,6 +44,10 @@
 						th:href="@{/acercaDe}" style="font-family: sans-serif">Acerca
 							De</a></li>
 				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<a class="logout" th:href="@{/logout}">Cerrar Sesión</a>
+
+				</form>
 			</div>
 		</nav>
 
@@ -181,7 +185,8 @@
 
 											<textarea class="form-control" name="descripcion"
 												id="exampleFormControlTextarea1" maxlength="100"
-												required="required" placeholder="Ingrese una descripción del Producto"></textarea>
+												required="required"
+												placeholder="Ingrese una descripción del Producto"></textarea>
 
 										</div>
 

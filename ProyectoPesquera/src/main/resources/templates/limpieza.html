@@ -45,6 +45,10 @@
 						th:href="@{/acercaDe}" style="font-family: sans-serif">Acerca
 							De</a></li>
 				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<a class="logout" th:href="@{/logout}">Cerrar Sesión</a>
+
+				</form>
 			</div>
 		</nav>
 
@@ -137,14 +141,12 @@
 
 											<div class="form-check" style="margin-top: 6px;">
 
-													<label class="radio-inline"> 
-														<input type="radio" class="form-check-input" name="optradio" id="Limpio"
-													onclick="hideShowContent()"> Cargamento
-													Limpio
-												</label> <label class="radio-inline"> 
-												<input type="radio" name="optradio"
-													id="Entero" required onclick="hideShowContent()">
-													Cargamento Entero
+												<label class="radio-inline"> <input type="radio"
+													class="form-check-input" name="optradio" id="Limpio"
+													onclick="hideShowContent()"> Cargamento Limpio
+												</label> <label class="radio-inline"> <input type="radio"
+													name="optradio" id="Entero" required
+													onclick="hideShowContent()"> Cargamento Entero
 												</label>
 											</div>
 
@@ -174,7 +176,7 @@
 												<input type="number" min="1"
 													th:max="${#lists.size(empleados)}" class="form-control"
 													placeholder="Número de Empleados" id="inputEmpleadoEntero">
-													
+
 												<div class="invalid-feedback">Ingrese un número</div>
 
 												<input type="number" name="numEmpleados" min="0" max="0"

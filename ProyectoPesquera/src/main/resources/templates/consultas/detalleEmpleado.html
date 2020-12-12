@@ -44,6 +44,10 @@
 						th:href="@{/acercaDe}" style="font-family: sans-serif">Acerca
 							De</a></li>
 				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<a class="logout" th:href="@{/logout}">Cerrar Sesión</a>
+
+				</form>
 			</div>
 		</nav>
 
@@ -62,36 +66,40 @@
 
 					<hr style="color: #3b5c94; border: 1px solid" />
 
-						<form>
-							<div class="form-group">
-								<label for="colFormLableSm">Id Empleado: </label>
-								<label for="colFormLableSm" th:text="${empleado.idEmpleado}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Nombre: </label>
-								<label for="colFormLableSm" th:text="${empleado.nombre}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Puesto: </label>
-								<label for="colFormLableSm" th:text="${empleado.puesto}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Teléfono: </label>
-								<label for="colFormLableSm" th:text="${empleado.telefono}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Fecha Nacimiento: </label>
-								<label for="colFormLableSm" th:text="${empleado.fechaNacimiento}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Fecha Contrato: </label>
-								<label for="colFormLableSm" th:text="${empleado.fechaContrato}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Dirección: </label>
-								<label for="colFormLableSm" th:text="${empleado.direccion}"></label>
-							</div>
-						</form>
+					<form>
+						<div class="form-group">
+							<label for="colFormLableSm">Id Empleado: </label> <label
+								for="colFormLableSm" th:text="${empleado.idEmpleado}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Nombre: </label> <label
+								for="colFormLableSm" th:text="${empleado.nombre}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Puesto: </label> <label
+								for="colFormLableSm" th:text="${empleado.puesto}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Teléfono: </label> <label
+								for="colFormLableSm" th:text="${empleado.telefono}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Fecha Nacimiento: </label> <label
+								for="colFormLableSm" th:text="${empleado.fechaNacimiento}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Fecha Contrato: </label> <label
+								for="colFormLableSm" th:text="${empleado.fechaContrato}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Dirección: </label> <label
+								for="colFormLableSm" th:text="${empleado.direccion}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Usuario: </label> <label
+								for="colFormLableSm" th:text="${empleado.usuario}"></label>
+						</div>
+					</form>
 
 				</div>
 			</div>

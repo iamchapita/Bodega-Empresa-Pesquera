@@ -44,11 +44,15 @@
 						th:href="@{/acercaDe}" style="font-family: sans-serif">Acerca
 							De</a></li>
 				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<a class="logout" th:href="@{/logout}">Cerrar Sesión</a>
+
+				</form>
 			</div>
 		</nav>
 
 		<div class="container"
-			style="margin-top:2%; margin-bottom: 2%; font-family: sans-serif; text-align: center;">
+			style="margin-top: 2%; margin-bottom: 2%; font-family: sans-serif; text-align: center;">
 			<div class="card" id="shadow">
 				<div class="card-body" style="margin-bottom: 1%">
 					<h1
@@ -66,7 +70,7 @@
 										<div class="form-group col-sm">
 											<div class="input-group">
 												<div class="input-group-prepend">
-												
+
 													<span class="input-group-text" id="inputGroupPrepend">Id
 														Cargamento</span>
 												</div>
@@ -81,10 +85,10 @@
 										<div class="form-group col-sm">
 											<div class="input-group">
 												<div class="input-group-prepend">
-												
+
 													<span class="input-group-text" id="inputGroupPrepend">Supervisor</span>
 												</div>
-												
+
 												<select class="custom-select" id="inputGroupSelect01"
 													required="required" name="idEmpleado">
 													<option value="">Seleccione un Supervisor</option>
@@ -96,16 +100,16 @@
 											</div>
 										</div>
 									</div>
-									
+
 									<div class="form-row">
 										<div class="form-group col-sm">
-										
+
 											<div class="input-group">
 												<div class="input-group-prepend">
-												
+
 													<span class="input-group-text" id="inputGroupPrepend">Pescado</span>
 												</div>
-												
+
 												<select class="custom-select" id="inputGroupSelect01"
 													required="required" name="idPescado">
 													<option value="">Seleccione un Pescado</option>
@@ -113,17 +117,17 @@
 														th:value="${pescado.idPescado}"
 														th:text="${pescado.idPescado+', '+pescado.nombre}" />
 												</select>
-												
+
 											</div>
 										</div>
 
 										<div class="form-group col-sm">
 											<div class="input-group">
 												<div class="input-group-prepend">
-												
+
 													<span class="input-group-text" id="inputGroupPrepend">Proveedor</span>
 												</div>
-												
+
 												<select class="custom-select" id="inputGroupSelect01"
 													required="required" name="idProveedor">
 													<option value="">Seleccione un Proveedor</option>
@@ -139,7 +143,7 @@
 										<div class="form-group col-sm">
 											<div class="input-group">
 												<div class="input-group-prepend">
-												
+
 													<span class="input-group-text" id="inputGroupPrepend">Calidad</span>
 												</div>
 												<input type="number" class="form-control" name="calidad"
@@ -152,44 +156,44 @@
 										<div class="form-group col-sm">
 											<div class="input-group">
 												<div class="input-group-prepend">
-												
+
 													<span class="input-group-text" id="inputGroupPrepend">Estado</span>
-													</div>
-													<select class="custom-select" id="inputGroupSelect01"
-														required="required" name="estado">
-														<option value="">Seleccione un Estado</option>
-														<option value="Limpio">Limpio</option>
-														<option value="Entero">Entero</option>
-													</select>
 												</div>
-												<div class="invalid-feedback">Seleccione una opción</div>
+												<select class="custom-select" id="inputGroupSelect01"
+													required="required" name="estado">
+													<option value="">Seleccione un Estado</option>
+													<option value="Limpio">Limpio</option>
+													<option value="Entero">Entero</option>
+												</select>
 											</div>
+											<div class="invalid-feedback">Seleccione una opción</div>
+										</div>
 
 
-											<div class="form-group col-sm">
-												<div class="input-group">
-													<div class="input-group-prepend">
-													
-														<span class="input-group-text" id="inputGroupPrepend">Peso(Kg)</span>
-													</div>
-													<input type="text" class="form-control" name="pesoGlobal"
-														placeholder="100.30" aria-describedby="inputGroupPrepend"
-														required pattern="(\d+\.?\d*)"/>
-													<div class="invalid-feedback">Ingrese un valor válido</div>
+										<div class="form-group col-sm">
+											<div class="input-group">
+												<div class="input-group-prepend">
+
+													<span class="input-group-text" id="inputGroupPrepend">Peso(Kg)</span>
 												</div>
+												<input type="text" class="form-control" name="pesoGlobal"
+													placeholder="100.30" aria-describedby="inputGroupPrepend"
+													required pattern="(\d+\.?\d*)" />
+												<div class="invalid-feedback">Ingrese un valor válido</div>
 											</div>
+										</div>
 									</div>
 
 									<div class="form-row">
 										<div class="form-group col-sm">
 											<div class="input-group">
 												<div class="input-group-prepend">
-													<span class="input-group-text" id="inputGroupPrepend">Precio por Kilo</span>
+													<span class="input-group-text" id="inputGroupPrepend">Precio
+														por Kilo</span>
 												</div>
 												<input type="text" class="form-control" name="precioKilo"
 													aria-describedby="inputGroupPrepend" required
-													placeholder="150.25"
-													pattern="(\d+\.?\d*)"/>
+													placeholder="150.25" pattern="(\d+\.?\d*)" />
 												<div class="invalid-feedback">Ingrese un</div>
 											</div>
 										</div>

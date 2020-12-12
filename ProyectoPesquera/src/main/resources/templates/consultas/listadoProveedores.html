@@ -44,6 +44,10 @@
 						th:href="@{/acercaDe}" style="font-family: sans-serif">Acerca
 							De</a></li>
 				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<a class="logout" th:href="@{/logout}">Cerrar Sesión</a>
+
+				</form>
 			</div>
 		</nav>
 
@@ -75,10 +79,8 @@
 								<td th:text="${tmpProveedor.nombre}"></td>
 								<td><a
 									th:href="@{/proveedor/detalle/{idProveedor} (idProveedor=${tmpProveedor.idProveedor})}">
-									<button class="button submit" >Detalle
-									</button>
-									</a>
-									</td>
+										<button class="button submit">Detalle</button>
+								</a></td>
 							</tr>
 						</tbody>
 					</table>

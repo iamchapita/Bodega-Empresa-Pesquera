@@ -44,6 +44,10 @@
 						th:href="@{/acercaDe}" style="font-family: sans-serif">Acerca
 							De</a></li>
 				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<a class="logout" th:href="@{/logout}">Cerrar Sesión</a>
+
+				</form>
 			</div>
 		</nav>
 
@@ -62,44 +66,47 @@
 
 					<hr style="color: #3b5c94; border: 1px solid" />
 
-						<form>
-							<div class="form-group">
-								<label for="colFormLableSm">Id Cargamento: </label>
-								<label for="colFormLableSm" th:text="${cargamento.idCargamento}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Supervisor: </label>
-								<label for="colFormLableSm" th:text="${' Id: '+cargamento.empleado.idEmpleado +'   Nombre: '+cargamento.empleado.nombre}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Pescado: </label>
-								<label for="colFormLableSm" th:text="${' Id: '+cargamento.pescado.idPescado +'   Nombre: '+ cargamento.pescado.nombre}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Proveedor: </label>
-								<label for="colFormLableSm" th:text="${' Id: '+cargamento.proveedor.idProveedor + '   Nombre: ' +cargamento.proveedor.nombre}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Limpieza: </label>
-								<label for="colFormLableSm" th:text="${cargamento.limpieza.idLimpieza}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Calidad: </label>
-								<label for="colFormLableSm" th:text="${cargamento.calidad}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Estado: </label>
-								<label for="colFormLableSm" th:text="${cargamento.estado}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Peso Global: </label>
-								<label for="colFormLableSm" th:text="${cargamento.pesoGlobal +' Kg.'}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Precio por Kilo: </label>
-								<label for="colFormLableSm" th:text="${'L. '+cargamento.precioKilo}"></label>
-							</div>
-						</form>
+					<form>
+						<div class="form-group">
+							<label for="colFormLableSm">Id Cargamento: </label> <label
+								for="colFormLableSm" th:text="${cargamento.idCargamento}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Supervisor: </label> <label
+								for="colFormLableSm"
+								th:text="${' Id: '+cargamento.empleado.idEmpleado +'   Nombre: '+cargamento.empleado.nombre}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Pescado: </label> <label
+								for="colFormLableSm"
+								th:text="${' Id: '+cargamento.pescado.idPescado +'   Nombre: '+ cargamento.pescado.nombre}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Proveedor: </label> <label
+								for="colFormLableSm"
+								th:text="${' Id: '+cargamento.proveedor.idProveedor + '   Nombre: ' +cargamento.proveedor.nombre}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Limpieza: </label> <label
+								for="colFormLableSm" th:text="${cargamento.limpieza.idLimpieza}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Calidad: </label> <label
+								for="colFormLableSm" th:text="${cargamento.calidad}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Estado: </label> <label
+								for="colFormLableSm" th:text="${cargamento.estado}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Peso Global: </label> <label
+								for="colFormLableSm" th:text="${cargamento.pesoGlobal +' Kg.'}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Precio por Kilo: </label> <label
+								for="colFormLableSm" th:text="${'L. '+cargamento.precioKilo}"></label>
+						</div>
+					</form>
 
 				</div>
 			</div>

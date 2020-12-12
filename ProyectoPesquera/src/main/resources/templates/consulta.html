@@ -40,9 +40,13 @@
 					class="nav-link">Consulta<span class="sr-only">(current)</span>
 				</a></li>
 
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/acercaDe}" style="font-family: sans-serif">Acerca De</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/acercaDe}"
+					style="font-family: sans-serif">Acerca De</a></li>
 			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<a class="logout" th:href="@{/logout}">Cerrar Sesión</a>
+
+			</form>
 		</div>
 	</nav>
 
@@ -135,18 +139,16 @@
 							style="max-width: 100%; width: auto; height: auto" />
 						<div class="card-body">
 							<a th:href="@{/factura/listaFacturas}"><h5 class="card-title">Factura</h5></a>
-							<p class="card-text">Consulte las Facturas ingresadas en el sistema.</p>
+							<p class="card-text">Consulte las Facturas ingresadas en el
+								sistema.</p>
 						</div>
 					</div>
-						<div class="card" style="border-color: white;">
-						<div class="card-body">
-						</div>
+					<div class="card" style="border-color: white;">
+						<div class="card-body"></div>
 					</div>
 					<div class="card" style="border-color: white">
-						
-						<div class="card-body">
-					
-						</div>
+
+						<div class="card-body"></div>
 					</div>
 
 

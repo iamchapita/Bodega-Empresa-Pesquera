@@ -44,6 +44,10 @@
 						th:href="@{/acercaDe}" style="font-family: sans-serif">Acerca
 							De</a></li>
 				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<a class="logout" th:href="@{/logout}">Cerrar Sesión</a>
+
+				</form>
 			</div>
 		</nav>
 
@@ -59,12 +63,14 @@
 
 					<div class="container">
 
-						<div class="alert alert-success" role="alert" style="background-color: #3b5c94; color:white;">
+						<div class="alert alert-success" role="alert"
+							style="background-color: #3b5c94; color: white;">
 							<h4 class="alert-heading">¡Algo ha salido mal!</h4>
-							<p>La cantidad de Latas que se ingresó para el producto, no está disponible en el inventario.
-							</p>
+							<p>La cantidad de Latas que se ingresó para el producto, no
+								está disponible en el inventario.</p>
 							<hr>
-							<p class="mb-0">Por favor, revisa la cantidad de Latas y vuelve a intentarlo.</p>
+							<p class="mb-0">Por favor, revisa la cantidad de Latas y
+								vuelve a intentarlo.</p>
 						</div>
 					</div>
 				</div>

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +33,16 @@ public class Controlador {
 	ServicioMecanico servicioMecanico;
 	@Autowired
 	ServicioRepara servicioRepara;
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
+	
+	// ===============================================================================================================//
+	// Seguridad
+	// ==============================================================================================================//
+
+	String contrasenia = "123";
+
 
 	// ===============================================================================================================//
 	// Auto

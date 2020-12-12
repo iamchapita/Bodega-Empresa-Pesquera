@@ -44,6 +44,10 @@
 						th:href="@{/acercaDe}" style="font-family: sans-serif">Acerca
 							De</a></li>
 				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<a class="logout" th:href="@{/logout}">Cerrar Sesión</a>
+
+				</form>
 			</div>
 		</nav>
 
@@ -62,16 +66,16 @@
 
 					<hr style="color: #3b5c94; border: 1px solid" />
 
-						<form>
-							<div class="form-group">
-								<label for="colFormLableSm">Id Proveedor: </label>
-								<label for="colFormLableSm" th:text="${proveedor.idProveedor}"></label>
-							</div>
-							<div class="form-group">
-								<label for="colFormLableSm">Nombre: </label>
-								<label for="colFormLableSm" th:text="${proveedor.nombre}"></label>
-							</div>
-						</form>
+					<form>
+						<div class="form-group">
+							<label for="colFormLableSm">Id Proveedor: </label> <label
+								for="colFormLableSm" th:text="${proveedor.idProveedor}"></label>
+						</div>
+						<div class="form-group">
+							<label for="colFormLableSm">Nombre: </label> <label
+								for="colFormLableSm" th:text="${proveedor.nombre}"></label>
+						</div>
+					</form>
 
 				</div>
 			</div>

@@ -44,6 +44,10 @@
 				</a></li>
 
 			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<a class="logout" th:href="@{/logout}">Cerrar Sesión</a>
+
+			</form>
 		</div>
 	</nav>
 
@@ -53,20 +57,19 @@
 		<div class="card" id="shadow">
 			<div class="card-body">
 
+
+				<h2
+					style="text-align: center; font-weight: bold; font-family: sans-serif; margin-bottom: 1%;">
+					Acerca De</h2>
+				<hr style="color: #3b5c94; border: 1px solid" />
 				<img th:src="@{/images/error-blanco.jpg}" class="img-fluid"
 					alt="Página Bajo Construcción">
 
 			</div>
-			
-			<hr style="color: #3b5c94; border: 1px solid" />
-
-			<h2
-				style="text-align: center; font-weight: bold; font-family: sans-serif; margin-bottom: 1%;">
-				Acerca De</h2>
 
 			<hr style="color: #3b5c94; border: 1px solid" />
 
-			<form style="text-align: center;" >
+			<form style="text-align: center; font-size: 20px;">
 				<div class="form-group">
 					<label for="colFormLableSm">Proyecto Programación Orientada
 						a Objetos (IS-410)</label>
@@ -76,7 +79,8 @@
 
 				</div>
 				<div class="form-group">
-					<label for="colFormLableSm">Luis Alejandro Morales 20161930074</label>
+					<label for="colFormLableSm">Luis Alejandro Morales
+						20161930074</label>
 				</div>
 				<div class="form-group">
 					<label for="colFormLableSm">Diciembre 2020 </label>

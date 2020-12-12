@@ -23,12 +23,14 @@ CREATE TABLE Cargamento (
 
 CREATE TABLE Empleado (
     idEmpleado INT PRIMARY KEY,
+    contrasenia varchar(1000),
     direccion VARCHAR(50),
     fechaContrato VARCHAR(50),
     fechaNacimiento VARCHAR(50),
     nombre VARCHAR(50),
     puesto VARCHAR(50),
-    telefono VARCHAR(50)
+    telefono VARCHAR(50),
+    usuario varchar(20)
 );
 
 CREATE TABLE Factura (
@@ -93,7 +95,7 @@ CREATE TABLE Proveedor (
 
 use Pesquera;
 
-insert into Empleado values(0,"N/A","N/A","N/A","N/A","N/A","N/A");
+insert into Empleado values(0,"N/A","N/A","N/A","N/A","N/A","N/A","N/A","N/A");
 insert into Limpieza values(0,0,"N/A","N/A",0);
 
 SELECT * FROM Proveedor;

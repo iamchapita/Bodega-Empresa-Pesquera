@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,6 +49,8 @@ public class Controller {
 	ServiceProductoFactura ServiceProductoFactura;
 	@Autowired
 	ServiceProveedor serviceProveedor;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	@GetMapping("/")
 	public String index() {
@@ -68,12 +71,31 @@ public class Controller {
 	public String consulta() {
 		return "consulta";
 	}
-	
+
 	@GetMapping("/acercaDe")
 	public String acercaDe() {
 		return "acercaDe";
 	}
 
+// ===============================================================================================================//
+// Seguridad
+// ==============================================================================================================//
+
+	@RequestMapping(value = "/encriptar", method = RequestMethod.GET)
+	public String encriptarContrasenia() {
+
+		List<Empleado> empleados = this.serviceEmpleado.listaEmpleados();
+		String contrasenia;
+		for (int i = 1; i < empleados.size(); i++) {
+			Empleado obj = empleados.get(i);
+			contrasenia = passwordEncoder.encode(obj.getContrasenia());
+			System.out.println(obj.getContrasenia() + "pasa a ser " + contrasenia);
+			obj.setContrasenia(contrasenia);
+			this.serviceEmpleado.crearEmpleado(obj);
+
+		}
+		return "encriptar";
+	}
 // ===================================================================================================================================
 // Cargamento
 // ===================================================================================================================================
@@ -149,18 +171,19 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "empleado/crearEmpleado", method = RequestMethod.POST)
-	public String crearEmpleado(@RequestParam("idEmpleado") int idEmpleado, @RequestParam("direccion") String direccion,
+	public String crearEmpleado(@RequestParam("idEmpleado") int idEmpleado,
+			@RequestParam("contrasenia") String contrasenia, @RequestParam("direccion") String direccion,
 			@RequestParam(name = "fechaContrato") String fechaContrato,
 			@RequestParam(name = "fechaNacimiento") String fechaNacimiento,
 			@RequestParam(name = "nombre") String nombre, @RequestParam(name = "puesto") String puesto,
-			@RequestParam(name = "telefono") String telefono) {
+			@RequestParam(name = "telefono") String telefono, @RequestParam(name = "usuario") String usuario) {
 
 		if (this.serviceEmpleado.buscarEmpleado(idEmpleado) != null) {
 			return "/avisos/avisoSobreescritura";
 		}
 
-		Empleado empleado = new Empleado(idEmpleado, direccion, fechaContrato, fechaNacimiento, nombre, puesto,
-				telefono);
+		Empleado empleado = new Empleado(idEmpleado, passwordEncoder.encode(contrasenia), direccion, fechaContrato, fechaNacimiento, nombre,
+				puesto, telefono, usuario);
 
 		this.serviceEmpleado.crearEmpleado(empleado);
 		return "redirect:/empleado";
@@ -211,7 +234,7 @@ public class Controller {
 		if (this.serviceFactura.buscarFactura(idFactura) != null) {
 			return "/avisos/avisoSobreescritura";
 		}
-		
+
 		Empleado vendedor = this.serviceEmpleado.buscarEmpleado(idVendedor);
 
 		Factura factura = new Factura(idFactura, fecha, 0.0, lugarVenta, 0.0, vendedor);
@@ -316,7 +339,7 @@ public class Controller {
 		if (this.serviceLimpieza.buscarLimpieza(idLimpieza) != null) {
 			return "/avisos/avisoSobreescritura";
 		}
-		
+
 		String[] tmp = idCargamentos.split(",");
 		Empleado supervisor = this.serviceEmpleado.buscarEmpleado(idSupervisor);
 		Limpieza limpieza = new Limpieza(idLimpieza, horaFinal, horaInicial, numEmpleados, supervisor);
@@ -376,7 +399,7 @@ public class Controller {
 		if (this.servicePescado.buscarPescado(idPescado) != null) {
 			return "/avisos/avisoSobreescritura";
 		}
-		
+
 		Pescado pescado = new Pescado(idPescado, color, nombre, tamanioPromedio, tipo);
 
 		this.servicePescado.crearPescado(pescado);
@@ -432,7 +455,7 @@ public class Controller {
 		if (this.serviceProducto.buscarProducto(idProducto) != null) {
 			return "/avisos/avisoSobreescritura";
 		}
-		
+
 		Pescado pescado = this.servicePescado.buscarPescado(idPescado);
 
 		Producto producto = new Producto(idProducto, cantidadLatas, descripcion, fechaElab, fechaVenc, peso, precio,
@@ -538,7 +561,7 @@ public class Controller {
 		if (this.serviceProveedor.buscarProveedor(idProveedor) != null) {
 			return "/avisos/avisoSobreescritura";
 		}
-		
+
 		Proveedor objProveedor = new Proveedor(idProveedor, nombre);
 		this.serviceProveedor.crearProveedor(objProveedor);
 
