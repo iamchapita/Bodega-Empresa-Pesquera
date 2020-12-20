@@ -21,6 +21,7 @@ function hideShowContent() {
     $("#selectEntero_val").val("");
 
   } else {
+  
     var SelectLimpio = document.getElementById("SelectLimpio");
     var SelectEntero = document.getElementById("SelectEntero");
 

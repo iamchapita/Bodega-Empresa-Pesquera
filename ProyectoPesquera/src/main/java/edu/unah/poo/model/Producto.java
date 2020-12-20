@@ -1,6 +1,5 @@
 package edu.unah.poo.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,13 +10,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "Producto")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Producto implements Serializable{
+
+public class Producto{
 
 	@Id
 	private int idProducto;

@@ -515,7 +515,6 @@ public class Controller {
 		if (cantidad > producto.getCantidadLatas()) {
 
 			return "errorCantidadLatas";
-
 		}
 
 		if (factura.getTotal() > 0) {

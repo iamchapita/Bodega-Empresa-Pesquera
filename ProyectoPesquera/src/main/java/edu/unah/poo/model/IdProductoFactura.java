@@ -42,7 +42,7 @@ public class IdProductoFactura implements Serializable {
 		return false;
 	}
 
-	public int hasCode() {
+	public int hashCode() {
 		return (int) this.getIdFactura() + this.getIdProducto();
 	}
 
