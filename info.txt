@@ -1,0 +1,34 @@
+Link Video Explicación de Proyecto (mala calidad :c): https://mega.nz/file/HIgSxaiA#EQGptOHMuS58DMQBbcosqqkNeKI6m86SwQA7IGrE7iw
+
+Enunciado Proyecto.
+
+Una compañía pesquera ha decidido controlar su sistema de producción y ventas a través de un sistema informático. 
+Este sistema deberá controlar los cargamentos recibidos y el despacho a los clientes. 
+
+Se debe tener un inventario de los tipos de peces que se procesan asignándoles un id, nombre, color,  tipo (de agua dulce o salada) y el  tamaño promedio.
+Cada vez que un proveedor nos trae materia prima (pescado) nos entrega un documento con la siguiente información: Tipo de pescado 
+(debe coincidir con nuestro inventario de peces), nombre de la empresa pesquera que nos trae o vende el producto (proveedor), peso global 
+del producto, y el precio por kilo. Además de estos datos, en el momento de recibir el producto nosotros le asignamos un número de 
+lote propio donde se almacenará el pescado y un índice de calidad (del 1 al 10) que determina uno de nuestros empleados (operador o supervisor), además 
+se guarda  en la que se almacena el lote.
+
+Es necesario almacenar la información del empleado que recibió el lote. 
+En general de cada empleado se almacena idEmpelado, nombre, numero de contacto, dirección, fecha de contratación, 
+fecha de nacimiento, puesto (operador, supervisor, vendedor)
+
+Con la materia prima recibida se elaboran los productos propios, que consisten en la limpieza y envasado en latas (1K, 2K, 3K, 5K), por tanto es 
+importante saber el estado de cada lote recibido: "sin limpiar", "limpio". 
+
+A cada limpieza se le debe asignar un número de id y almacenar los números de lotes a limpiar, hora de inicio, hora final, 
+id del encargado (supervisor) y número de empleados asignados a esta tarea y el número de enlatados realizados. 
+En caso que el lote ya esté limpio solo se genera una limpieza con cero número de empleados pero sí se le asigna un número 
+del supervisor, además dentro de una limpieza se puede procesar varios lotes con el mismo estado.
+
+El pescado recibido puede mantenerse en cámaras frigoríficas durante una temporada, pero una vez que se ha sacado de la cámara frigorífica, éste debe estar 
+enlatado al final del día.
+
+Se deberá llevar un control del inventario de producto enlatado  el cual almacena la siguiente información id generado, tipo de pescado enlatado, 
+cantidad de latas, fecha de precio, descripción.
+
+Se debe manejar el control de las ventas de los productos para lo cual se almacenan la información de la facturas como ser lugar de venta, fecha, tipo de 
+producto (id del inventario), cantidad, precio, id empleado que realizó la venta (vendedor). cuando se realiza una factura se debe rebajar del inventario. 
