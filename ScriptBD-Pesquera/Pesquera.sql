@@ -1,25 +1,8 @@
-create database Pesquera;
-use Pesquera;
+DROP DATABASE IF EXISTS Pesquera;
 
-CREATE TABLE Cargamento (
-    idCargamento INT PRIMARY KEY,
-    idEmpleado INT,
-    idLimpieza INT,
-    idPescado INT,
-    idProveedor INT,
-    calidad INT,
-    estado VARCHAR(50),
-    pesoGlobal DOUBLE,
-    precioKilo DOUBLE,
-    FOREIGN KEY (idEmpleado)
-        REFERENCES Empleado (idEmpleado),
-    FOREIGN KEY (idLimpieza)
-        REFERENCES Limpieza (idLimpieza),
-    FOREIGN KEY (idPescado)
-        REFERENCES Pescado (idPescado),
-    FOREIGN KEY (idProveedor)
-        REFERENCES Proveedor (idProveedor)
-);
+CREATE DATABASE Pesquera;
+
+USE Pesquera;
 
 CREATE TABLE Empleado (
     idEmpleado INT PRIMARY KEY,
@@ -33,25 +16,13 @@ CREATE TABLE Empleado (
     usuario varchar(20)
 );
 
-CREATE TABLE Factura (
-    idFactura INT PRIMARY KEY,
-    idEmpleado INT,
-    fecha VARCHAR(50),
-    isv DOUBLE,
-    lugarVenta VARCHAR(50),
-    total DOUBLE,
-    FOREIGN KEY (idEmpleado)
-        REFERENCES Empleado (idEmpleado)
-);
-
 CREATE TABLE Limpieza (
     idLimpieza INT PRIMARY KEY,
     idSupervisor INT,
     horaFinal VARCHAR(50),
     horaInicio VARCHAR(50),
     numEmpleados INT,
-    FOREIGN KEY (idSupervisor)
-        REFERENCES Empleado (idEmpleado)
+    FOREIGN KEY (idSupervisor) REFERENCES Empleado (idEmpleado)
 );
 
 CREATE TABLE Pescado (
@@ -71,20 +42,7 @@ CREATE TABLE Producto (
     fechaVenc VARCHAR(50),
     peso DOUBLE,
     precio DOUBLE,
-    FOREIGN KEY (idPescado)
-        REFERENCES Pescado (idPescado)
-);
-
-CREATE TABLE ProductoFactura (
-    idProducto INT,
-    idFactura INT,
-    cantidad INT,
-    precio DOUBLE,
-    PRIMARY KEY (idFactura , idProducto),
-    FOREIGN KEY (idFactura)
-        REFERENCES Factura (idFactura),
-    FOREIGN KEY (idProducto)
-        REFERENCES Producto (idProducto)
+    FOREIGN KEY (idPescado) REFERENCES Pescado (idPescado)
 );
 
 CREATE TABLE Proveedor (
@@ -92,24 +50,120 @@ CREATE TABLE Proveedor (
     nombre VARCHAR(50)
 );
 
+CREATE TABLE Cargamento (
+    idCargamento INT PRIMARY KEY,
+    idEmpleado INT,
+    idLimpieza INT,
+    idPescado INT,
+    idProveedor INT,
+    calidad INT,
+    estado VARCHAR(50),
+    pesoGlobal DOUBLE,
+    precioKilo DOUBLE,
+    FOREIGN KEY (idEmpleado) REFERENCES Empleado (idEmpleado),
+    FOREIGN KEY (idLimpieza) REFERENCES Limpieza (idLimpieza),
+    FOREIGN KEY (idPescado) REFERENCES Pescado (idPescado),
+    FOREIGN KEY (idProveedor) REFERENCES Proveedor (idProveedor)
+);
 
-use Pesquera;
+CREATE TABLE Factura (
+    idFactura INT PRIMARY KEY,
+    idEmpleado INT,
+    fecha VARCHAR(50),
+    isv DOUBLE,
+    lugarVenta VARCHAR(50),
+    total DOUBLE,
+    FOREIGN KEY (idEmpleado) REFERENCES Empleado (idEmpleado)
+);
 
-insert into Empleado values(0,"N/A","N/A","N/A","N/A","N/A","N/A","N/A","N/A");
-insert into Limpieza values(0,0,"N/A","N/A",0);
+CREATE TABLE ProductoFactura (
+    idProducto INT,
+    idFactura INT,
+    cantidad INT,
+    precio DOUBLE,
+    PRIMARY KEY (idFactura, idProducto),
+    FOREIGN KEY (idFactura) REFERENCES Factura (idFactura),
+    FOREIGN KEY (idProducto) REFERENCES Producto (idProducto)
+);
 
-SELECT * FROM Proveedor;
-SELECT * FROM Empleado;
-SELECT * FROM Limpieza;
-SELECT * FROM Cargamento;
-SELECT * FROM Producto;
-SELECT * FROM Factura;
-SELECT * FROM ProductoFactura;
-SELECT * FROM Pescado;
-SELECT * FROM Factura;
+/*
+ use Pesquera;
+ 
+ insert into
+ Empleado
+ values
+ (
+ 0,
+ "N/A",
+ "N/A",
+ "N/A",
+ "N/A",
+ "N/A",
+ "N/A",
+ "N/A",
+ "N/A"
+ );
+ 
+ INSERT INTO 
+ Limpieza
+ VALUES
+ (0, 0, "N/A", "N/A", 0);
+ 
+ SELECT
+ *
+ FROM
+ Proveedor;
+ 
+ SELECT
+ *
+ FROM
+ Empleado;
+ 
+ SELECT
+ *
+ FROM
+ Limpieza;
+ 
+ SELECT
+ *
+ FROM
+ Cargamento;
+ 
+ SELECT
+ *
+ FROM
+ Producto;
+ 
+ SELECT
+ *
+ FROM
+ Factura;
+ 
+ SELECT
+ *
+ FROM
+ ProductoFactura;
+ 
+ SELECT
+ *
+ FROM
+ Pescado;
+ 
+ SELECT
+ *
+ FROM
+ Factura;
+ 
+ DELETE FROM
+ Factura;
+ 
+ DELETE FROM
+ ProductoFactura;
+ 
+ DELETE FROM
+ Limpieza;
+ 
+ DELETE FROM
+ Empleado; */
 
-DELETE FROM Factura;
-DELETE FROM ProductoFactura;
-DELETE FROM Limpieza;
-DELETE FROM Empleado;
-
+DESC Limpieza;
